@@ -11,11 +11,12 @@
 
 						/* Interface Macros */
 /* Macros of common pin of seven segments */
-#define SSD_COMMON  1
+#define SSD_COMMON  		1
+
 
 /* Macros of common pins of multiplexing seven segments */
-#define SSD_FIRST_COMMON  1
-#define SSD_SECOND_COMMON 2
+#define SSD_FIRST_COMMON  	1
+#define SSD_SECOND_COMMON 	2
 
 
 						/* Functions ProtoTypes */
@@ -44,4 +45,4 @@ void SSD_vidTurnOFF(u8 Copy_u8Common);
 /**********************************************************************************/
 void SSD_vidDisplayNum(u8 Copy_u8Num);
 
-#endif /* HAL_SSD_SSD_INTERFACE_H_ */
+#endif /* HAL_SSD_INTERFACE_H_ */

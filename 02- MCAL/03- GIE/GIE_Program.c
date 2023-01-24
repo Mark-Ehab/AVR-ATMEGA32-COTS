@@ -27,10 +27,10 @@ u8 GIE_u8EnableGlobalInterrupt(u8 Copy_u8Flag)
 		switch(Copy_u8Flag)
 		{
 		case GIE_ENABLE:
-			SREG_REG |= Copy_u8Flag;
+			SREG |= Copy_u8Flag;
 			break;
 		case GIE_DISABLE:
-			SREG_REG &= Copy_u8Flag;
+			SREG &= Copy_u8Flag;
 			break;
 		}
 	}

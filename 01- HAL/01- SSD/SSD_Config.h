@@ -9,72 +9,82 @@
 #ifndef HAL_SSD_CONFIG_H_
 #define HAL_SSD_CONFIG_H_
 
-/***********************************************/
-/* Configure the type of seven segment common: */
-/*					       */
-/* Options : 1) Common Cathode		       */
-/* 	      2) Common Anode		       */
-/***********************************************/
-#define SSD_COMMON_TYPE 1 //Default: Common Cathode
-
-/***********************************************/
-/* Configure seven segment mode:               */
-/*					       */
-/* Options : 1) Single Mode		       */	
-/* 	      2) Multiplexing Mode             */
-/***********************************************/
-#define SSD_MODE 2
+/************************************************************************/
+/* Configure the type of seven segment common:- 			*/
+/*					        			*/
+/* Options :  - COMMON_CATHODE		       				*/
+/* 	      -	COMMON_ANODE		       				*/
+/* 					       				*/
+/************************************************************************/
+#define SSD_COMMON_TYPE COMMON_CATHODE /* Default: COMMON_CATHODE */
 
 /************************************************************************/
-/* Configure the port of seven segment (could be used for multiplexing) */
+/* Configure seven segment mode:-              				*/
+/*					       				*/
+/* Options :  - SINGLE_MODE		       				*/
+/* 	      - MULTIPLEXING_MODE              				*/
+/* 					      			        */
+/************************************************************************/
+#define SSD_MODE MULTIPLEXING_MODE /* Default: SINGLE_MODE */
+
+/************************************************************************/
+/* Configure the port of seven segment:-				*/
 /*                                                                      */
-/* Options : 1) PORT_A                                                  */
-/* 	      2) PORT_B                                         	*/
-/* 	      3) PORT_C                                          	*/
-/* 	      4) PORT_D                                                 */
+/* Options :  - PORT_A                                                  */
+/* 	      - PORT_B                                         	        */
+/* 	      - PORT_C                                          	*/
+/* 	      - PORT_D                                                  */
+/*									*/
+/* Note    : This port could be used either for a single SSD 		*/
+/* 	     or for two multiplexing SSDs    			        */
+/*                                                                      */
 /************************************************************************/
-#define SSD_PORT_CFG PORT_A //Default: PORTA
+#define SSD_PORT_CFG PORT_A /* Default: PORTA */
 
-/***********************************************/
-/* Configure the port of seven segment common: */
-/*					       */
-/* Options : 1) PORT_A                         */
-/* 	      2) PORT_B               	       */
-/* 	      3) PORT_C               	       */
-/* 	      4) PORT_D               	       */
-/***********************************************/
-#define SSD_PORT_COMMON_CFG PORT_B //Default: PORTB
+/************************************************************************/
+/* Configure the port of seven segment common:- 			*/
+/*					       				*/
+/* Options :  - PORT_A                         				*/
+/* 	      - PORT_B               	       				*/
+/* 	      - PORT_C               	       				*/
+/* 	      - PORT_D               	       				*/
+/* 					       				*/
+/************************************************************************/
+#define SSD_PORT_COMMON_CFG PORT_B /* Default: PORTB */
 
 /************************************************************************/
 /* In case of one seven segment, Configure the pin of its common on the */
-/* seven segment common port 						*/
+/* seven segment common port:- 						*/
 /*                                                                      */
-/* Options : 1) PIN_0                                                   */
-/* 	      2) PIN_1                                                  */
-/* 	      3) PIN_2                                                  */
-/* 	      4) PIN_3                                                  */
-/* 	      5) PIN_4                                                  */
-/* 	      6) PIN_5                                                  */
-/* 	      7) PIN_6                                                  */
-/* 	      8) PIN_7                                                  */
+/* Options :  - PIN_0                                                   */
+/* 	      - PIN_1                                                   */
+/* 	      - PIN_2                                                   */
+/* 	      - PIN_3                                                   */
+/* 	      - PIN_4                                                   */
+/* 	      - PIN_5                                                   */
+/* 	      - PIN_6                                                   */
+/* 	      - PIN_7                                                   */
+/*									*/
 /************************************************************************/
-#define SSD_PIN_COMMON_CFG  PIN_0 //Default: PIN_0
+#define SSD_PIN_COMMON_CFG  PIN_0 /* Default: PIN_0 */
 
-/****************************************************/
-/* In case of two multiplexing, Configure the two   */
-/* pins of their common on the seven segment common */
-/* port: 					    */      
-/*                                                  */
-/* Options : 1) PIN_0                               */
-/* 	      2) PIN_1                  	    */
-/* 	      3) PIN_2                  	    */
-/* 	      4) PIN_3                  	    */
-/* 	      5) PIN_4                  	    */
-/* 	      6) PIN_5                  	    */
-/* 	      7) PIN_6                  	    */
-/* 	      8) PIN_7                  	    */
-/****************************************************/
-#define SSD_PIN_FIRST_COMMON_CFG  PIN_0
-#define SSD_PIN_SECOND_COMMON_CFG PIN_1
+/************************************************************************/
+/* In case of two multiplexing, Configure the two pins of their common 	*/
+/* on the seven segment common port:- 					*/
+/*                                                  			*/
+/* Options :  - PIN_0                               			*/
+/* 	      - PIN_1                  	            			*/
+/* 	      - PIN_2                  	           		   	*/
+/* 	      - PIN_3                  	            			*/
+/* 	      - PIN_4                  	            			*/
+/* 	      - PIN_5                  	            			*/
+/* 	      - PIN_6                  	            			*/
+/* 	      - PIN_7                  	            			*/
+/*						    			*/
+/* Note    : Only Selected in SSD Multiplexing Mode 			*/
+/* 									*/
+/************************************************************************/
+#define SSD_PIN_FIRST_COMMON_CFG  PIN_0 /* Default: PIN_0 */
+#define SSD_PIN_SECOND_COMMON_CFG PIN_1 /* Default: PIN_1 */
 
-#endif /* HAL_SSD_SSD_CONFIG_H_ */
+#endif /* HAL_SSD_CONFIG_H_ */

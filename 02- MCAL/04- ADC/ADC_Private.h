@@ -62,6 +62,7 @@
 #define ADC_TIMER1_CAPTURE_EVENT             0b11100000 /* Timer/Counter1 Capture Event */
 #define ADC_AUTO_TRIGGER_SOURCE_MASK         0b00011111 /* Mask of Auto-Trigger Source */
 
+
 /******************************************Configuration Options Values******************************************/
 
 /* Reference Voltage Options */

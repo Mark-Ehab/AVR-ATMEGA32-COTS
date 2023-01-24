@@ -5,11 +5,13 @@
 /*              Description	 : DIO Program                  */
 /* 	        Version          : V1.0                         */
 /****************************************************************/
-#include "../../LIB/STD_ERRORS.h"
-#include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/STD_ERRORS.h"
+
 #include "DIO_Interface.h"
 #include "DIO_Private.h"
+#include "DIO_Config.h"
 
 /*Port level*/
 
@@ -24,16 +26,16 @@ u8 DIO_u8setPortDir(u8 Copy_u8port , u8 Copy_u8dir)
 	switch(Copy_u8port)
 	{
 	case PORT_A:
-		DDRA_REG=Copy_u8dir;
+		DDRA=Copy_u8dir;
 		break;
 	case PORT_B:
-		DDRB_REG=Copy_u8dir;
+		DDRB=Copy_u8dir;
 		break;
 	case PORT_C:
-		DDRC_REG=Copy_u8dir;
+		DDRC=Copy_u8dir;
 		break;
 	case PORT_D:
-		DDRD_REG=Copy_u8dir;
+		DDRD=Copy_u8dir;
 		break;
 	default:
 		local_u8errStatus = RT_NOK ;
@@ -51,16 +53,16 @@ u8 DIO_u8setPortVal(u8 Copy_u8port , u8 Copy_u8dval)
 	switch(Copy_u8port)
 	{
 	case PORT_A:
-		PORTA_REG=Copy_u8dval;
+		PORTA=Copy_u8dval;
 		break;
 	case PORT_B:
-		PORTB_REG=Copy_u8dval;
+		PORTB=Copy_u8dval;
 		break;
 	case PORT_C:
-		PORTC_REG=Copy_u8dval;
+		PORTC=Copy_u8dval;
 		break;
 	case PORT_D:
-		PORTD_REG=Copy_u8dval;
+		PORTD=Copy_u8dval;
 		break;
 	default:
 		local_u8errStatus = RT_NOK ;
@@ -78,22 +80,23 @@ u8 DIO_u8getPortVal(u8 Copy_u8port , u8* Copy_u8pval)
 	switch(Copy_u8port)
 	{
 	case PORT_A:
-		*Copy_u8pval=PINA_REG;
+		*Copy_u8pval=PINA;
 		break;
 	case PORT_B:
-		*Copy_u8pval=PINB_REG;
+		*Copy_u8pval=PINB;
 		break;
 	case PORT_C:
-		*Copy_u8pval=PINC_REG;
+		*Copy_u8pval=PINC;
 		break;
 	case PORT_D:
-		*Copy_u8pval=PIND_REG;
+		*Copy_u8pval=PIND;
 		break;
 	default:
 		local_u8errStatus = RT_NOK ;
 	}
 	return local_u8errStatus ;
 }
+
 /*Pin level*/
 
 /**********************************************************************************/
@@ -111,16 +114,16 @@ u8 DIO_u8setPinDir(u8 Copy_u8port , u8 Copy_u8pin , u8 Copy_u8dir)
 			switch(Copy_u8port)
 			{
 			case PORT_A:
-				CLR_BIT(DDRA_REG,Copy_u8pin);
+				CLR_BIT(DDRA,Copy_u8pin);
 				break;
 			case PORT_B:
-				CLR_BIT(DDRB_REG,Copy_u8pin);
+				CLR_BIT(DDRB,Copy_u8pin);
 				break;
 			case PORT_C:
-				CLR_BIT(DDRC_REG,Copy_u8pin);
+				CLR_BIT(DDRC,Copy_u8pin);
 				break;
 			case PORT_D:
-				CLR_BIT(DDRD_REG,Copy_u8pin);
+				CLR_BIT(DDRD,Copy_u8pin);
 				break;
 			default:
 				local_u8errStatus = RT_NOK ;
@@ -131,16 +134,16 @@ u8 DIO_u8setPinDir(u8 Copy_u8port , u8 Copy_u8pin , u8 Copy_u8dir)
 			switch(Copy_u8port)
 			{
 			case PORT_A:
-				SET_BIT(DDRA_REG,Copy_u8pin);
+				SET_BIT(DDRA,Copy_u8pin);
 				break;
 			case PORT_B:
-				SET_BIT(DDRB_REG,Copy_u8pin);
+				SET_BIT(DDRB,Copy_u8pin);
 				break;
 			case PORT_C:
-				SET_BIT(DDRC_REG,Copy_u8pin);
+				SET_BIT(DDRC,Copy_u8pin);
 				break;
 			case PORT_D:
-				SET_BIT(DDRD_REG,Copy_u8pin);
+				SET_BIT(DDRD,Copy_u8pin);
 				break;
 			default:
 				local_u8errStatus = RT_NOK ;
@@ -172,16 +175,16 @@ u8 DIO_u8setPinVal(u8 Copy_u8port , u8 Copy_u8pin , u8 Copy_u8val)
 			switch(Copy_u8port)
 			{
 			case PORT_A:
-				CLR_BIT(PORTA_REG,Copy_u8pin);
+				CLR_BIT(PORTA,Copy_u8pin);
 				break;
 			case PORT_B:
-				CLR_BIT(PORTB_REG,Copy_u8pin);
+				CLR_BIT(PORTB,Copy_u8pin);
 				break;
 			case PORT_C:
-				CLR_BIT(PORTC_REG,Copy_u8pin);
+				CLR_BIT(PORTC,Copy_u8pin);
 				break;
 			case PORT_D:
-				CLR_BIT(PORTD_REG,Copy_u8pin);
+				CLR_BIT(PORTD,Copy_u8pin);
 				break;
 			default:
 				local_u8errStatus = RT_NOK ;
@@ -192,16 +195,16 @@ u8 DIO_u8setPinVal(u8 Copy_u8port , u8 Copy_u8pin , u8 Copy_u8val)
 			switch(Copy_u8port)
 			{
 			case PORT_A:
-				SET_BIT(PORTA_REG,Copy_u8pin);
+				SET_BIT(PORTA,Copy_u8pin);
 				break;
 			case PORT_B:
-				SET_BIT(PORTB_REG,Copy_u8pin);
+				SET_BIT(PORTB,Copy_u8pin);
 				break;
 			case PORT_C:
-				SET_BIT(PORTC_REG,Copy_u8pin);
+				SET_BIT(PORTC,Copy_u8pin);
 				break;
 			case PORT_D:
-				SET_BIT(PORTD_REG,Copy_u8pin);
+				SET_BIT(PORTD,Copy_u8pin);
 				break;
 			default:
 				local_u8errStatus = RT_NOK ;
@@ -231,16 +234,16 @@ u8 DIO_u8getPinVal(u8 Copy_u8port , u8 Copy_u8pin , u8* Copy_u8pval)
 		switch(Copy_u8port)
 		{
 		case PORT_A:
-			*Copy_u8pval=GET_BIT(PINA_REG,Copy_u8pin);
+			*Copy_u8pval=GET_BIT(PINA,Copy_u8pin);
 			break;
 		case PORT_B:
-			*Copy_u8pval=GET_BIT(PINB_REG,Copy_u8pin);
+			*Copy_u8pval=GET_BIT(PINB,Copy_u8pin);
 			break;
 		case PORT_C:
-			*Copy_u8pval=GET_BIT(PINC_REG,Copy_u8pin);
+			*Copy_u8pval=GET_BIT(PINC,Copy_u8pin);
 			break;
 		case PORT_D:
-			*Copy_u8pval=GET_BIT(PIND_REG,Copy_u8pin);
+			*Copy_u8pval=GET_BIT(PIND,Copy_u8pin);
 			break;
 		default:
 			local_u8errStatus = RT_NOK ;
@@ -265,16 +268,16 @@ u8 DIO_u8togglePinVal(u8 Copy_u8port , u8 Copy_u8pin)
 		switch(Copy_u8port)
 		{
 		case PORT_A:
-			TOGGLE_BIT(PORTA_REG,Copy_u8pin);
+			TOGGLE_BIT(PORTA,Copy_u8pin);
 			break;
 		case PORT_B:
-			TOGGLE_BIT(PORTB_REG,Copy_u8pin);
+			TOGGLE_BIT(PORTB,Copy_u8pin);
 			break;
 		case PORT_C:
-			TOGGLE_BIT(PORTC_REG,Copy_u8pin);
+			TOGGLE_BIT(PORTC,Copy_u8pin);
 			break;
 		case PORT_D:
-			TOGGLE_BIT(PORTD_REG,Copy_u8pin);
+			TOGGLE_BIT(PORTD,Copy_u8pin);
 			break;
 		default:
 			local_u8errStatus = RT_NOK ;

@@ -16,6 +16,7 @@
 #define PORT_C 			(u8)2
 #define PORT_D 			(u8)3
 
+
 /* DIO Pins */
 #define PIN_0 			(u8)0
 #define PIN_1 			(u8)1
@@ -26,17 +27,22 @@
 #define PIN_6 			(u8)6
 #define PIN_7 			(u8)7
 
+
 /* Pin Level Signals */
 #define INPUT 			(u8)0
 #define OUTPUT			(u8)1
-#define LOW 				(u8)0
-#define HIGH 				(u8)1
+
+#define LOW 			(u8)0
+#define HIGH 			(u8)1
+
 
 /* Port Level Signals */
-#define FULL_INPUT 			0x00
-#define FULL_OUTPUT			0xff
-#define FULL_LOW 			0x00
-#define FULL_HIGH 			0xff
+#define FULL_INPUT 		0x00
+#define FULL_OUTPUT		0xff
+
+#define FULL_LOW 		0x00
+#define FULL_HIGH 		0xff
+
 
 						/* Function prototypes */
 /* Port Level */

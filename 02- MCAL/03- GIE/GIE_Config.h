@@ -6,9 +6,9 @@
 /* 	        Version          : V1.0                         */
 /****************************************************************/
 
-#ifndef MCAL_GIE_CONFIG_H_
-#define MCAL_GIE_CONFIG_H_
+#ifndef MCAL_GIE_GIE_CONFIG_H_
+#define MCAL_GIE_GIE_CONFIG_H_
 
 
 
-#endif /* MCAL_GIE_CONFIG_H_ */
+#endif /* MCAL_GIE_GIE_CONFIG_H_ */

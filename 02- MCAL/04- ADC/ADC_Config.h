@@ -49,6 +49,9 @@
 /* 	     - TIMER1_OVERFLOW                    	 */
 /* 	     - TIMER1_CAPTURE_EVENT              	 */
 /* 	                          		 	 */
+/* Note   : Only Selected When ADC Auto-Trigger is 	 */
+/*	    Enabled					 */
+/*							 */
 /*********************************************************/
 #define ADC_AUTO_TRIGGER_SOURCE FREE_RUNNING /* Default: FREE_RUNNING */
 

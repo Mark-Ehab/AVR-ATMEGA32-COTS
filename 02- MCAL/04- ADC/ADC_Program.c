@@ -15,13 +15,15 @@
 #include "ADC_Config.h"
 
 /********************************* Defining Global Variables *********************************/
-
-#if   ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
+/* Check ADC bit resolution based on configuration to build its functions */
+#if    ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
 	/* Global Pointer to u8 to Hold Memory Address of ADC Reading After Conversion Completes */
-	static u8* Global_pu8Reading = NULL; /* Used in 8-bit Resolution */
-#else
+	static u8* Global_pu8Reading = NULL;   /* Used in 8-bit Resolution */
+#elif  ADC_BIT_RESOLUTION == TEN_BIT_RESOLUTION
 	/* Global Pointer to u16 to Hold Memory Address of ADC Reading After Conversion Completes */
 	static u16* Global_pu16Reading = NULL; /* Used in 10-bit Resolution */
+#else
+	#error "Wrong Bit Resolution Configuration"
 #endif
 
 
@@ -59,6 +61,7 @@ static void ADC_vidDisableInterrupt(void)
 	CLR_BIT(ADCSRA,ADC_ADIE);
 }
 
+
 /******************************************** Public Functions ********************************************/
 
 /**********************************************************************************/
@@ -67,10 +70,11 @@ static void ADC_vidDisableInterrupt(void)
 /* Input Arguments : void						          */
 /* Return          : void						          */
 /**********************************************************************************/  
-void ADC_vidInit()
+void ADC_vidInit(void)
 {
+   /******************************************Set ADC Reference Voltage*****************************************/
    /* Clear ADC reference voltage selection bits */
-	ADMUX &= ADC_REF_VOLT_MASK;
+   ADMUX &= ADC_REF_VOLT_MASK;
    /* Check the reference voltage mode for ADC */
    #if   ADC_REF_VOLT == AREF
 	ADMUX |= ADC_AREF;
@@ -83,6 +87,7 @@ void ADC_vidInit()
    #endif
 
 
+   /******************************************Set ADC Result Adjustment*****************************************/
    /* Check if ADC result in ADC data registers (ADCH,ADCL) is left adjusted or not */
    #if   ADC_RESULT_ADJUSTMENT == RIGHT_ADJUSTMENT
 	CLR_BIT(ADMUX,ADC_ADLAR);
@@ -93,12 +98,11 @@ void ADC_vidInit()
    #endif
 
 
+   /******************************************Set ADC Auto-Trigger*****************************************/
    /* Check if ADC auto-trigger is enabled or not */
    #if   ADC_AUTO_TRIGGER == AUTO_TRIGGER_ENABLE
-
 	/* Clear Auto-Trigger Source Selection Bits */
 	SFIOR &= ADC_AUTO_TRIGGER_SOURCE_MASK
-
 	/* Check Selected Auto Trigger Source */
 	#if   ADC_AUTO_TRIGGER_SOURCE == FREE_RUNNING
 		SFIOR |= ADC_FREE_RUNNING;
@@ -127,6 +131,7 @@ void ADC_vidInit()
    #endif
 
 
+   /******************************************Set ADC Clock Pre-Scaler*****************************************/
    /* Clear ADC CLK Pre-Scaler Selection Bits*/
    ADCSRA &= ADC_CLK_MASK;
    /* Check selected ADC pre-scaler for CLK fed to ADC */
@@ -157,172 +162,133 @@ void ADC_vidInit()
    SET_BIT(ADCSRA,ADC_ADEN);
 
 }
+/**********************************************************************************/
+/* Description     : This function starts ADC conversion through polling (busy-   */
+/*                   waiting) on ADIF flag in ADCSRA register			  */
+/* Input Arguments : u8 Copy_u8ChanelNum				          */
+/* Return          : u16						          */
+/* Note            : This function used for both 8-bit and 10-bit ADC resolutions */
+/**********************************************************************************/
+u16 ADC_u16GetAdcReadingSync(u8 Copy_u8ChannelNum)
+{
+  /* Define local variable that holds the result of ADC reading */
+  u16 Local_u16Result ;
 
-/* Check ADC bit resolution based on configuration to build its functions */
+  /* Clear ADC Single Ended Channels Bits in ADMUX Register */
+  ADMUX &= ADC_SINGLE_ENDED_CHANNELS_MASK;
 
-#if  ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
+  /* Select the ADC channel to read from */
+  ADMUX |= Copy_u8ChannelNum;
 
-	/**********************************************************************************/
-	/* Description     : This function starts ADC conversion through polling (busy-   */
-	/*                   waiting) on ADIF flag in ADCSRA register			  */
-	/* Input Arguments : u8 Copy_u8ChannelNum				          */
-	/* Return          : u8 						          */
-	/* Note            : This function used for 8-bit ADC resolution 		  */
-	/**********************************************************************************/
-	u8 ADC_u8GetAdcReadingSyncEightBit(u8 Copy_u8ChannelNum)
-	{
-	   /* Define local variable that holds the result of ADC reading */
-	   u8 Local_u8Result ;
+  /* Start ADC Conversion */
+  ADC_vidStartConversion();
 
-	   /* Clear ADC Single Ended Channels Bits in ADMUX Register */
-	   ADMUX &= ADC_SINGLE_ENDED_CHANNELS_MASK;
+  /* Polling (busy waiting) over ADC Conversion Complete Interrupt Flag untill it's set to 1 */
+  while(GET_BIT(ADCSRA,ADC_ADIF) == 0);
 
-	   /* Select the ADC channel to read from */
-	   ADMUX |= Copy_u8ChannelNum;
+  /* Clear ADC Conversion Complete Interrupt Flag By Writing 1 to ADIF Bit */
+  SET_BIT(ADCSRA,ADC_ADIF);
 
-	   /* Start ADC Conversion */
-	   ADC_vidStartConversion();
+  /* Check ADC bit resolution based on configuration to build its functions */
+  #if    ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
+  	/* Check if ADC result in ADC data registers (ADCH,ADCL) is left adjusted or not */
+  	#if   ADC_RESULT_ADJUSTMENT == RIGHT_ADJUSTMENT
+  		 /* Get ADC Reading */
+  	  	  Local_u16Result = ((u8)(ADCL>>2)|(u8)(ADCH<<6));
+  	#elif ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
+  		 /* Get ADC Reading */
+  	  	  Local_u16Result = ADCH;
+  	#else
+  		#error "Wrong ADC Result Adjustment Configuration"
+  	#endif
+  #elif  ADC_BIT_RESOLUTION == TEN_BIT_RESOLUTION
+  	/* Check if ADC result in ADC data registers (ADCH,ADCL) is left adjusted or not */
+  	#if   ADC_RESULT_ADJUSTMENT == RIGHT_ADJUSTMENT
+  		/* Get ADC Reading */
+  	  	Local_u16Result = ((u16)ADCL|(u16)(ADCH<<8));
+  	#elif ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
+  		/* Get ADC Reading */
+  	  	Local_u16Result = ((u16)(ADCL>>6)|(u16)(ADCH<<2));
+  	#else
+  		#error "Wrong ADC Result Adjustment Configuration"
+  	#endif
+  #else
+  	#error "Wrong Bit Resolution Configuration"
+  #endif
 
-	   /* Polling (busy waiting) over ADC Conversion Complete Interrupt Flag untill it's set to 1 */
-	   while(GET_BIT(ADCSRA,ADC_ADIF) == 0);
+  return Local_u16Result;
+}
+/**********************************************************************************/
+/* Description     : This function starts ADC conversion and when conversion      */
+/*                   completes, the hardware generates an interrupt to get the    */
+/*                   ADC reading without busy-waiting the processor               */
+/* Input Arguments : u8 Copy_u8ChanelNum , u16 * Copy_pu16Reading,		  */
+/*                   void(*Copy_pvAdcFunc)(void)				  */
+/* Return          : void							  */
+/* Note            : This function used for both 8-bit and 10-bit ADC resolutions */
+/**********************************************************************************/
+void ADC_vidGetAdcReadingAsync(u8 Copy_u8ChannelNum , u16* Copy_pu16Reading, void(*Copy_pvAdcFunc)(void))
+{
+   /* Check ADC bit resolution based on configuration to build its functions */
+   #if    ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
+        /* Initialize the global ADC reading pointer that will hold the address of ADC reading after conversion completes */
+	Global_pu8Reading = (u8*)Copy_pu16Reading;
+   #elif  ADC_BIT_RESOLUTION == TEN_BIT_RESOLUTION
+	/* Initialize the global ADC reading pointer that will hold the address of ADC reading after conversion completes */
+	Global_pu16Reading = Copy_pu16Reading;
+   #else
+   	   #error "Wrong Bit Resolution Configuration"
+   #endif
 
-	   /* Clear ADC Conversion Complete Interrupt Flag By Writing 1 to ADIF Bit */
-	   SET_BIT(ADCSRA,ADC_ADIF);
+  /* Register the callback function to be called in ISR after ADC conversion completes */
+  ADC_pvConversionCompleteFunc = Copy_pvAdcFunc;
 
-	   /* Check ADC Result Adjustment */
-	   #if ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
-		   /* Get ADC Reading */
-		   Local_u8Result = ADCH;
-	   #else
-		   /* Get ADC Reading */
-		   Local_u8Result = ((u8)(ADCL>>2)|(u8)(ADCH<<6));
-	   #endif
+  /* Clear ADC Single Ended Channels Bits in ADMUX Register */
+  ADMUX &= ADC_SINGLE_ENDED_CHANNELS_MASK;
 
-	   return Local_u8Result;
-	}
-	/**********************************************************************************/
-	/* Description     : This function starts ADC conversion and when conversion      */
-	/*                   completes, the hardware generates an interrupt to get the    */
-	/*                   ADC reading without busy-waiting the processor               */
-	/* Input Arguments : u8 Copy_u8ChannelNum , u8 * Copy_pu8Reading,		  */
-	/*                   void(*Copy_pvAdcFunc)(void)				  */
-	/* Return          : void							  */
-	/* Note            : This function used for 8-bit ADC resolution 		  */
-	/**********************************************************************************/
-	void ADC_vidGetAdcReadingAsyncEightBit(u8 Copy_u8ChannelNum , u8* Copy_pu8Reading , void(*Copy_pvAdcFunc)(void))
-	{
-	  /* Initialize the global ADC reading pointer that will hold the address of ADC reading after conversion completes */
-	  Global_pu8Reading = Copy_pu8Reading;
+  /* Select the ADC channel to read from */
+  ADMUX |= Copy_u8ChannelNum;
 
-	  /* Register the callback function to be called in ISR after ADC conversion completes */
-	  ADC_pvConversionCompleteFunc = Copy_pvAdcFunc;
+  /* Enable ADC Conversion Complete Interrupt */
+  ADC_vidEnableInterrupt();
 
-	  /* Clear ADC Single Ended Channels Bits in ADMUX Register */
-	  ADMUX &= ADC_SINGLE_ENDED_CHANNELS_MASK;
-
-	  /* Select the ADC channel to read from */
-	  ADMUX |= Copy_u8ChannelNum;
-
-	  /* Enable ADC Conversion Complete Interrupt */
-	  ADC_vidEnableInterrupt();
-
-	  /* Start ADC Conversion */
-	  ADC_vidStartConversion();
-
-	}
-#else
-	/**********************************************************************************/
-	/* Description     : This function starts ADC conversion through polling (busy-   */
-	/*                   waiting) on ADIF flag in ADCSRA register			  */
-	/* Input Arguments : u8 Copy_u8ChannelNum				          */
-	/* Return          : u16						          */
-	/* Note            : This function used for 10-bit ADC resolution 		  */
-	/**********************************************************************************/
-	u16 ADC_u16GetAdcReadingSyncTenBit(u8 Copy_u8ChannelNum)
-	{
-	  /* Define local variable that holds the result of ADC reading */
-	  u8 Local_u16Result ;
-
-	  /* Clear ADC Single Ended Channels Bits in ADMUX Register */
-	  ADMUX &= ADC_SINGLE_ENDED_CHANNELS_MASK;
-
-	  /* Select the ADC channel to read from */
-	  ADMUX |= Copy_u8ChannelNum;
-
-	  /* Start ADC Conversion */
-	  ADC_vidStartConversion();
-
-	  /* Polling (busy waiting) over ADC Conversion Complete Interrupt Flag untill it's set to 1 */
-	  while(GET_BIT(ADCSRA,ADC_ADIF) == 0);
-
-	  /* Clear ADC Conversion Complete Interrupt Flag By Writing 1 to ADIF Bit */
-	  SET_BIT(ADCSRA,ADC_ADIF);
-
-	  /* Check ADC Result Adjustment */
-	  #if ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
-	 	   /* Get ADC Reading */
-	 	   Local_u16Result = ((u16)(ADCH<<2)|(u16)(ADCL>>6));
-	  #else
-	 	   /* Get ADC Reading */
-	 	   Local_u16Result = ((u16)(ADCH<<8)|(u16)ADCL);
-	  #endif
-
-	  return Local_u16Result;
-	}
-	/**********************************************************************************/
-	/* Description     : This function starts ADC conversion and when conversion      */
-	/*                   completes, the hardware generates an interrupt to get the    */
-	/*                   ADC reading without busy-waiting the processor               */
-	/* Input Arguments : u8 Copy_u8ChannelNum , u16 * Copy_pu16Reading,		  */
-	/*                   void(*Copy_pvAdcFunc)(void)				  */
-	/* Return          : void							  */
-	/* Note            : This function used for 10-bit ADC resolution 		  */
-	/**********************************************************************************/
-	void ADC_vidGetAdcReadingAsyncTenBit(u8 Copy_u8ChannelNum , u16* Copy_pu16Reading, void(*Copy_pvAdcFunc)(void))
-	{
-	  /* Initialize the global ADC reading pointer that will hold the address of ADC reading after conversion completes */
-	  Global_pu16Reading = Copy_pu16Reading;
-
-	  /* Register the callback function to be called in ISR after ADC conversion completes */
-	  ADC_pvConversionCompleteFunc = Copy_pvAdcFunc;
-
-	  /* Clear ADC Single Ended Channels Bits in ADMUX Register */
-	  ADMUX &= ADC_SINGLE_ENDED_CHANNELS_MASK;
-
-	  /* Select the ADC channel to read from */
-	  ADMUX |= Copy_u8ChannelNum;
-
-	  /* Enable ADC Conversion Complete Interrupt */
-	  ADC_vidEnableInterrupt();
-
-	  /* Start ADC Conversion */
-	  ADC_vidStartConversion();
-	}
-
-#endif
+  /* Start ADC Conversion */
+  ADC_vidStartConversion();
+}
 
 /******************************************** Interrupt Handlers ********************************************/
 
-/* ADC Conversion Complete Interrupt */
+/************************************************/
+/* 	ADC Conversion Complete Interrupt	*/
+/************************************************/
 void __vector_16 (void) __attribute__ ((signal,used, externally_visible)) ; \
 void __vector_16 (void)
 {
-	#if   ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
-		#if ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
-			/* Get ADC Reading */
-			*Global_pu8Reading = ADCH;
+	/* Check ADC bit resolution based on configuration to build its functions */
+	#if    ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
+		/* Check if ADC result in ADC data registers (ADCH,ADCL) is left adjusted or not */
+		#if   ADC_RESULT_ADJUSTMENT == RIGHT_ADJUSTMENT
+			 /* Get ADC Reading */
+			 *Global_pu8Reading = ((u8)(ADCL>>2)|(u8)(ADCH<<6));
+		#elif ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
+			 /* Get ADC Reading */
+			 *Global_pu8Reading = ADCH;
 		#else
-			  /* Get ADC Reading */
-			*Global_pu8Reading = ((u8)(ADCL>>2)|(u8)(ADCH<<6));
+			#error "Wrong ADC Result Adjustment Configuration"
+		#endif
+	#elif  ADC_BIT_RESOLUTION == TEN_BIT_RESOLUTION
+		/* Check if ADC result in ADC data registers (ADCH,ADCL) is left adjusted or not */
+		#if   ADC_RESULT_ADJUSTMENT == RIGHT_ADJUSTMENT
+			/* Get ADC Reading */
+			*Global_pu16Reading = ((u16)ADCL|(u16)(ADCH<<8));
+		#elif ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
+			/* Get ADC Reading */
+			*Global_pu16Reading = ((u16)(ADCL>>6)|(u16)(ADCH<<2));
+		#else
+			#error "Wrong ADC Result Adjustment Configuration"
 		#endif
 	#else
-		#if ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
-			/* Get ADC Reading */
-			*Global_pu16Reading = ((u16)(ADCH<<2)|(u16)(ADCL>>6));
-		#else
-		        /* Get ADC Reading */
-			*Global_pu16Reading = ((u16)(ADCH<<8)|(u16)ADCL);
-		#endif
+		#error "Wrong Bit Resolution Configuration"
 	#endif
 
 	/* Check if callback function is registered or not */
