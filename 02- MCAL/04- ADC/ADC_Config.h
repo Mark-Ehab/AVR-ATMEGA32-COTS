@@ -49,11 +49,30 @@
 /* 	     - TIMER1_OVERFLOW                    	 */
 /* 	     - TIMER1_CAPTURE_EVENT              	 */
 /* 	                          		 	 */
-/* Note   : Only Selected When ADC Auto-Trigger is 	 */
-/*	    Enabled					 */
+/* Note    : Only Selected When ADC Auto-Trigger is 	 */
+/*	     Enabled					 */
 /*							 */
 /*********************************************************/
 #define ADC_AUTO_TRIGGER_SOURCE FREE_RUNNING /* Default: FREE_RUNNING */
+
+/*********************************************************/
+/* Select ADC Channel in Case Auto-Trigger Mode is 	 */
+/* Enabled  :-           			         */
+/* 		         	                         */
+/* Options : - CH_0               			 */
+/*    	     - CH_1	         			 */
+/* 	     - CH_2		  			 */
+/* 	     - CH_3       	 			 */
+/* 	     - CH_4        	 			 */
+/* 	     - CH_5       	 			 */
+/* 	     - CH_6       	 			 */
+/* 	     - CH_7       	 			 */
+/* 	                          		 	 */
+/* Note    : Only Selected When ADC Auto-Trigger is 	 */
+/*	     Enabled					 */
+/*							 */
+/*********************************************************/
+#define ADC_AUTO_TRIGGER_CHANNEL CH_0 /* Default: CH_0 */
 
 /*********************************************************/
 /* Select ADC CLK Pre-scaler :-                          */
@@ -77,5 +96,12 @@
 /* 	                        		 	 */
 /*********************************************************/
 #define ADC_BIT_RESOLUTION EIGHT_BIT_RESOLUTION /* Default: Eight_BIT_RESOLUTION */
+
+/*********************************************************/
+/*							 */
+/* Set ADC Timeout Value             	         	 */
+/* 		         	                         */
+/*********************************************************/
+#define ADC_TIMEOUT	50000
 
 #endif /*MCAL_ADC_CONFIG_H_*/

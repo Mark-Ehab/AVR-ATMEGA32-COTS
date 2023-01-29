@@ -62,6 +62,15 @@
 #define ADC_TIMER1_CAPTURE_EVENT             0b11100000 /* Timer/Counter1 Capture Event */
 #define ADC_AUTO_TRIGGER_SOURCE_MASK         0b00011111 /* Mask of Auto-Trigger Source */
 
+/* ADC Status Options */
+#define ADC_IDLE                             0 /* Status tells that ADC peripheral is available to start conversion */
+#define ADC_BUSY                             1 /* Status tells that ADC peripheral is busy and not available to start conversion */
+
+
+/* ADC Complete ISR Source */
+#define ADC_SINGLE_CHANNEL_ASYNC             0 /* Tells that ADC Conversion Complete ISR source is from a single channel */
+#define ADC_CHAIN_CHANNEL_ASYNC              1 /* Tells that ADC Conversion Complete ISR source is from a chain of channels */
+
 
 /******************************************Configuration Options Values******************************************/
 
@@ -76,7 +85,7 @@
 #define LEFT_ADJUSTMENT                      2
 
 
-/* Enable/Disable Auto-Trigger Values */
+/* Enable/Disable Auto-Trigger Options */
 #define AUTO_TRIGGER_ENABLE                  1
 #define AUTO_TRIGGER_DISABLE                 2
 
@@ -90,6 +99,17 @@
 #define TIMER_COMPARE_MATCH_B                6
 #define TIMER1_OVERFLOW                      7
 #define TIMER1_CAPTURE_EVENT                 8
+
+
+/* Auto-Trigger Channel Options */
+#define CH_0                                 0
+#define CH_1                                 1
+#define CH_2                                 2
+#define CH_3                                 3
+#define CH_4                                 4
+#define CH_5                                 5
+#define CH_6                                 6
+#define CH_7                                 7
 
 
 /* ADC CLK Pre-scaler Options */

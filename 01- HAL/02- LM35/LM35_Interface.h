@@ -31,15 +31,15 @@
 /**********************************************************************************/
 void LM35_vidLM35Init(void);
 /**********************************************************************************/
-/* Description     : Get the digital reading equivalent to analog reading sensed  */
-/*		     by LM35 Temperature Sensor	synchronously			  */
+/* Description     : Get the temperature reading in celsius sensed by LM35        */
+/*		     Temperature Sensor	synchronously			  	  */
 /* Input Arguments : Copy_u8LM35ChannelNum	    			          */
 /* Return          : u16	                      			          */
 /**********************************************************************************/
 u16 LM35_u16GetLM35ReadingSync(u8 Copy_u8LM35ChannelNum);
 /**********************************************************************************/
-/* Description     : Get the digital reading equivalent to analog reading sensed  */
-/*		     by LM35 Temperature Sensor	asynchronously			  */
+/* Description     : Get the temperature reading in celsius sensed by LM35        */
+/*		     Temperature Sensor	asynchronously			          */
 /* Input Arguments : Copy_u8LM35ChannelNum , Copy_pu16LM35Reading,  		  */
 /* 		     void(*Copy_pvLM35Func)(void)			    	  */
 /* Return          : void	                      			          */

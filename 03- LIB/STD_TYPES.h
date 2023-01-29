@@ -8,7 +8,7 @@
 #ifndef LIB_STD_TYPES_H_
 #define LIB_STD_TYPES_H_
 
-/*Defining New Types*/
+/* Defining New Types */
 
 typedef unsigned char u8;
 typedef signed char s8;

@@ -7,7 +7,7 @@
 #ifndef LIB_BIT_MATH_H_
 #define LIB_BIT_MATH_H_
 
-/*Function-like Macros for set, clear, toggle and get bit*/
+/* Function-like Macros for set, clear, toggle and get bit */
 
 #define SET_BIT(Copy_u8Reg,Copy_u8Pin) 		(Copy_u8Reg |= (1 << Copy_u8Pin))
 #define CLR_BIT(Copy_u8Reg,Copy_u8Pin) 		(Copy_u8Reg &= (~(1 << Copy_u8Pin)))
