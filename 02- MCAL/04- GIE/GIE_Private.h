@@ -6,10 +6,10 @@
 /* 	        Version          : V1.0                         */
 /****************************************************************/
 
-#ifndef MCAL_GIE_GIE_PRIVATE_H_
-#define MCAL_GIE_GIE_PRIVATE_H_
+#ifndef MCAL_GIE_PRIVATE_H_
+#define MCAL_GIE_PRIVATE_H_
 
 /* Status Register Definition */
 #define SREG 	*((volatile u8*)0x5F)
 
-#endif /* MCAL_GIE_GIE_PRIVATE_H_ */
+#endif /* MCAL_GIE_PRIVATE_H_ */

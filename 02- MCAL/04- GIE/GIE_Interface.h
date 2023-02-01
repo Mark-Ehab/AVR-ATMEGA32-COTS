@@ -5,8 +5,8 @@
 /*              Description	 : GIE Interface                */
 /* 	        Version          : V1.0                         */
 /****************************************************************/
-#ifndef MCAL_GIE_GIE_INTERFACE_H_
-#define MCAL_GIE_GIE_INTERFACE_H_
+#ifndef MCAL_GIE_INTERFACE_H_
+#define MCAL_GIE_INTERFACE_H_
 
 
  	 	 	 	 	 /* Interface Macros */
@@ -28,4 +28,4 @@
 /**********************************************************************************/
 u8 GIE_u8EnableGlobalInterrupt(u8 Copy_u8Flag);
 
-#endif /* MCAL_GIE_GIE_INTERFACE_H_  */
+#endif /* MCAL_GIE_INTERFACE_H_  */

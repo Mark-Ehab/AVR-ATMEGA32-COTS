@@ -9,6 +9,8 @@
 #ifndef MCAL_DIO_PRIVATE_H_
 #define MCAL_DIO_PRIVATE_H_
 
+/* DIO Registers Definitions */
+
 /* Port_A DIO registers */
 #define DDRA 	*((volatile u8*)0x3A)
 #define PORTA 	*((volatile u8*)0x3B)
