@@ -10,11 +10,11 @@
 #define MCAL_ADC_PRIVATE_H_
 
 /* ADC Registers Definition */
-#define ADMUX	                             *((volatile u8*)0x27)
-#define ADCSRA	                             *((volatile u8*)0x26)
-#define ADCH	                             *((volatile u8*)0x25)
-#define ADCL	                             *((volatile u8*)0x24)
-#define SFIOR	                             *((volatile u8*)0x50)
+#define ADMUX	                             *((volatile u8*)0x27) /* ADC Multiplexer Selection Register */
+#define ADCSRA	                             *((volatile u8*)0x26) /* ADC Control and Status Register A */
+#define ADCH	                             *((volatile u8*)0x25) /* ADC Data High Register */
+#define ADCL	                             *((volatile u8*)0x24) /* ADC Data Low Register */
+#define SFIOR	                             *((volatile u8*)0x50) /* Special FunctionIO Register */
 
 
 /* Definition of ADC Single Ended Channels Mask */

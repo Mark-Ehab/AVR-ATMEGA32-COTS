@@ -32,7 +32,4 @@ void PORT_vidInit(void)
 	PORTB =  PORT_PORTB_INITIAL_VALUE; 	/* Initial Values of port B pins */
 	PORTC =  PORT_PORTC_INITIAL_VALUE;      /* Initial Values of port C pins */
 	PORTD =  PORT_PORTD_INITIAL_VALUE;	/* Initial Values of port D pins */
-
-
-
 }

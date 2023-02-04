@@ -10,10 +10,10 @@
 #define MCAL_EXTI_PRIVATE_H_
 
 /* EXTI Registers Definitions */
-#define GICR 	                                   *((volatile u8*)0x5B)
-#define GIFR 	                                   *((volatile u8*)0x5A)
-#define MCUCR 	                                   *((volatile u8*)0x55)
-#define MCUCSR	                                   *((volatile u8*)0x54)
+#define GICR 	                                   *((volatile u8*)0x5B) /* General Interrupt Control Register */
+#define GIFR 	                                   *((volatile u8*)0x5A) /* General Interrupt Flag Register */
+#define MCUCR 	                                   *((volatile u8*)0x55) /* MCU Control Register */
+#define MCUCSR	                                   *((volatile u8*)0x54) /* MCU Control and Status Register */
 
 /* Bit Definitions of General Interrupt Control Register (GICR) */
 #define EXTI_INT2			       	   5 /* External Interrupt Request 2 Enable */

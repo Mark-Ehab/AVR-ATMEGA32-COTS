@@ -12,17 +12,17 @@
 /* Registers Definitions */
 
 /* Port_A DIO registers */
-#define DDRA 	*((volatile u8*)0x3A)
-#define PORTA 	*((volatile u8*)0x3B)
+#define DDRA 	                             *((volatile u8*)0x3A) /* Port A Data Direction Register */
+#define PORTA 	                             *((volatile u8*)0x3B) /* Port A Data Register */
 /* Port_B DIO registers */
-#define DDRB	 *((volatile u8*)0x37)
-#define PORTB	 *((volatile u8*)0x38)
+#define DDRB	                             *((volatile u8*)0x37) /* Port B Data Direction Register */
+#define PORTB	                             *((volatile u8*)0x38) /* Port B Data Register */
 /* Port_C DIO registers */
-#define DDRC	 *((volatile u8*)0x34)
-#define PORTC	 *((volatile u8*)0x35)
+#define DDRC	                             *((volatile u8*)0x34) /* Port C Data Direction Register */
+#define PORTC	                             *((volatile u8*)0x35) /* Port C Data Register */
 /* Port_D DIO registers */
-#define DDRD	 *((volatile u8*)0x31)
-#define PORTD	 *((volatile u8*)0x32)
+#define DDRD	                             *((volatile u8*)0x31) /* Port D Data Direction Register */
+#define PORTD	                             *((volatile u8*)0x32) /* Port D Data Register */
 
 
 /* Define a function-like macro called CONC to help us in concatenation of registers bits from config file */
