@@ -14,10 +14,21 @@
 #include "EXTI_Private.h"
 #include "EXTI_Config.h"
 
-/* Define Some Global Variables */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                            GLOBAL VARIABLES DEFINITIONS	                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 static void(*EXTI_pvEXTI0Func)(void) = NULL; /* Global Pointer To Function That Holds Address of EXTI0 ISR Application Specific Function */
 static void(*EXTI_pvEXTI1Func)(void) = NULL; /* Global Pointer To Function That Holds Address of EXTI1 ISR Application Specific Function */
 static void(*EXTI_pvEXTI2Func)(void) = NULL; /* Global Pointer To Function That Holds Address of EXTI2 ISR Application Specific Function */
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	  PUBLIC FUNCTIONS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /**********************************************************************************/
 /* Description     : Initialize External Interrupt 0				  */
@@ -396,7 +407,11 @@ u8 EXTI_u8EXTI2SetCallback(void(*Copy_pvEXTI2Func)(void))
 	return Local_u8ErrorStatus;
 }
 
-/******************************************** Interrupt Handlers ********************************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                            	  INTERRUPT HANDLERS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /************************************************/
 /* 	External Interrupt Request 0		*/

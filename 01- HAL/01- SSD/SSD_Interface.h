@@ -9,7 +9,12 @@
 #ifndef HAL_SSD_INTERFACE_H_
 #define HAL_SSD_INTERFACE_H_
 
-						/* Interface Macros */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	   INTERFACE MACROS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 /* Macros of common pin of seven segments */
 #define SSD_COMMON  		1
 
@@ -19,7 +24,12 @@
 #define SSD_SECOND_COMMON 	2
 
 
-						/* Functions ProtoTypes */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	 FUNCTIONS PROTOTYPES		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 /**********************************************************************************/
 /* Description     : Initialize Seven Segment					  */
 /* Input Arguments : void			    			          */

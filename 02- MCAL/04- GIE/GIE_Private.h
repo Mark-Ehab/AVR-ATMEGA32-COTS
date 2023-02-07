@@ -9,7 +9,12 @@
 #ifndef MCAL_GIE_PRIVATE_H_
 #define MCAL_GIE_PRIVATE_H_
 
-/* GIE Registers Definitions */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                             GIE REGISTERS DEFINITIONS		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 #define SREG 	                              *((volatile u8*)0x5F) /* Status Register */
 
 #endif /* MCAL_GIE_PRIVATE_H_ */

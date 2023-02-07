@@ -9,11 +9,23 @@
 #ifndef MCAL_EXTI_PRIVATE_H_
 #define MCAL_EXTI_PRIVATE_H_
 
-/* EXTI Registers Definitions */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                             EXTI REGISTERS DEFINITIONS		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 #define GICR 	                                   *((volatile u8*)0x5B) /* General Interrupt Control Register */
 #define GIFR 	                                   *((volatile u8*)0x5A) /* General Interrupt Flag Register */
 #define MCUCR 	                                   *((volatile u8*)0x55) /* MCU Control Register */
 #define MCUCSR	                                   *((volatile u8*)0x54) /* MCU Control and Status Register */
+
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	   PRIVATE MACROS				     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Bit Definitions of General Interrupt Control Register (GICR) */
 #define EXTI_INT2			       	   5 /* External Interrupt Request 2 Enable */
@@ -49,7 +61,11 @@
 #define EXTI_EXTI2_RISING_EDGE 			   0b01000000 /* Generate EXTI2 request on The Rising Edge of INT2 */
 
 
-/******************************************Configuration Options Values******************************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           CONFIGURATION OPTIONS VALUES		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* EXTI Interrupt Sense Control Actions Options */
 #define LOW_LEVEL                                  0

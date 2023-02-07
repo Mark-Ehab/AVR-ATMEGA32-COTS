@@ -9,7 +9,11 @@
 #ifndef MCAL_DIO_PRIVATE_H_
 #define MCAL_DIO_PRIVATE_H_
 
-/* DIO Registers Definitions */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                             DIO REGISTERS DEFINITIONS		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Port_A DIO registers */
 #define DDRA 	                                 *((volatile u8*)0x3A) /* Port A Data Direction Register */

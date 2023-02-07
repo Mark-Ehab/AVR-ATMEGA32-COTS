@@ -9,8 +9,12 @@
 #ifndef MCAL_PORT_INTERFACE_H_
 #define MCAL_PORT_INTERFACE_H_
 
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	 FUNCTIONS PROTOTYPES		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
-					/* Functions Prototypes */
 /**********************************************************************************/
 /* Description     : Initialize each pin of AVR Atmega32 ports			  */
 /* Input Arguments : void						          */

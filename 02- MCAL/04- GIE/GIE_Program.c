@@ -14,6 +14,12 @@
 #include "GIE_Private.h"
 #include "GIE_Config.h"
 
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	  PUBLIC FUNCTIONS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 /**********************************************************************************/
 /* Description     : Enable/Disable Global Interrupt 	   			  */
 /* Input Arguments : u8 Copy_u8Flag		  			          */
@@ -21,7 +27,9 @@
 /**********************************************************************************/
 u8 GIE_u8EnableGlobalInterrupt(u8 Copy_u8Flag)
 {
+        /* Define Some Local Variables */
 	u8 local_u8errStatus = RT_OK ;
+        
 	if(Copy_u8Flag == GIE_ENABLE || Copy_u8Flag == GIE_DISABLE)
 	{
 		switch(Copy_u8Flag)

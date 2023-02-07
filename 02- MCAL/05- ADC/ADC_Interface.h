@@ -9,7 +9,12 @@
 #ifndef MCAL_ADC_INTERFACE_H_
 #define MCAL_ADC_INTERFACE_H_
 
-                                /* Interface Macros */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                       DEFINING NEW TYPES FOR INTERFACING		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 /*
  * Define a new type for Chain ADC to define variables that holds chain parameters like :-
  * 1) Chain ID
@@ -25,6 +30,11 @@ typedef struct
 	void (*ADC_pvChainNotificationFunc)(void);
 }ADC_Chain_s;
 
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	   INTERFACE MACROS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Single Ended ADC channels */
 #define ADC_CH0            0    /* ADC Single-Ended Channel 0 */
@@ -36,7 +46,12 @@ typedef struct
 #define ADC_CH6            6    /* ADC Single-Ended Channel 6 */
 #define ADC_CH7            7    /* ADC Single-Ended Channel 7 */
 
-                                /* Function Prototypes */
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	 FUNCTIONS PROTOTYPES		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /**********************************************************************************/
 /* Description     : Initialize ADC peripheral with the pre-bulid configurations  */

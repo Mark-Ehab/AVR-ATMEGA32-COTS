@@ -9,13 +9,24 @@
 #ifndef MCAL_ADC_PRIVATE_H_
 #define MCAL_ADC_PRIVATE_H_
 
-/* ADC Registers Definition */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                              ADC REGISTERS DEFINITIONS		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 #define ADMUX	                             *((volatile u8*)0x27) /* ADC Multiplexer Selection Register */
 #define ADCSRA	                             *((volatile u8*)0x26) /* ADC Control and Status Register A */
 #define ADCH	                             *((volatile u8*)0x25) /* ADC Data High Register */
 #define ADCL	                             *((volatile u8*)0x24) /* ADC Data Low Register */
 #define SFIOR	                             *((volatile u8*)0x50) /* Special FunctionIO Register */
 
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	   PRIVATE MACROS				     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Definition of ADC Single Ended Channels Mask */
 #define ADC_SINGLE_ENDED_CHANNELS_MASK       0b11100000
@@ -72,7 +83,11 @@
 #define ADC_CHAIN_CHANNEL_ASYNC              1 /* Tells that ADC Conversion Complete ISR source is from a chain of channels */
 
 
-/******************************************Configuration Options Values******************************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           CONFIGURATION OPTIONS VALUES		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Reference Voltage Options */
 #define AREF                                 1

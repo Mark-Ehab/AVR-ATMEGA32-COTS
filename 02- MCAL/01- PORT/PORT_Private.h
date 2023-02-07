@@ -9,7 +9,11 @@
 #ifndef MCAL_PORT_PRIVATE_H_
 #define MCAL_PORT_PRIVATE_H_
 
-/* Registers Definitions */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                            PORT REGISTERS DEFINITIONS		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Port_A DIO registers */
 #define DDRA 	                             *((volatile u8*)0x3A) /* Port A Data Direction Register */
@@ -24,6 +28,12 @@
 #define DDRD	                             *((volatile u8*)0x31) /* Port D Data Direction Register */
 #define PORTD	                             *((volatile u8*)0x32) /* Port D Data Register */
 
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	   PRIVATE MACROS				     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Define a function-like macro called CONC to help us in concatenation of registers bits from config file */
 #define CONC(b7,b6,b5,b4,b3,b2,b1,b0)        CONC_HELP(b7,b6,b5,b4,b3,b2,b1,b0)

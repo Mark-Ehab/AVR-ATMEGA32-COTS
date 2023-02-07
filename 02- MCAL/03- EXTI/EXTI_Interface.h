@@ -9,7 +9,12 @@
 #ifndef MCAL_EXTI_INTERFACE_H_
 #define MCAL_EXTI_INTERFACE_H_
 
-				/* Interface Macros */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                       DEFINING NEW TYPES FOR INTERFACING		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
 /*
  * Define new enum type for EXTI0 sense control signals which are :
  * 1) Generate EXTI0 request on Low Level of INT0
@@ -54,7 +59,11 @@ typedef enum
 }EXTI_EXTI2SenseControl_e;
 
 
-				/* Functions Prototypes */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	 FUNCTIONS PROTOTYPES		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /**********************************************************************************/
 /* Description     : Initialize External Interrupt 0				  */

@@ -14,7 +14,11 @@
 #include "ADC_Private.h"
 #include "ADC_Config.h"
 
-/********************************* Defining Global Variables *********************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                            GLOBAL VARIABLES DEFINITIONS	                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* Global Pointer to u16 to Hold Memory Address of ADC Reading After Conversion Completes */
 static u16* Global_pu16Reading = NULL; 						/* Used for both 10-bit and 8-bit Resolutions */
@@ -35,8 +39,11 @@ static void(*ADC_pvChainConversionCompleteNotificationFunc)(void) = NULL;	/* A p
 /* Define a pointer to function for single channel async callback */
 static void(*ADC_pvConversionCompleteNotificationFunc)(void) = NULL;
 
-
-/******************************************** Private Functions ********************************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	  PRIVATE FUNCTIONS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /**********************************************************************************/
 /* Description     : Start ADC conversion 			              	  */
@@ -66,8 +73,11 @@ static void ADC_vidDisableInterrupt(void)
 	CLR_BIT(ADCSRA,ADC_ADIE);
 }
 
-
-/******************************************** Public Functions ********************************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	  PUBLIC FUNCTIONS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /**********************************************************************************/
 /* Description     : Initialize ADC peripheral with the pre-bulid configurations  */
@@ -497,7 +507,11 @@ u8 ADC_u8GetAdcReadingChainAsyncSingleConversion(ADC_Chain_s* Copy_Chain_ps)
 	return Local_u8ErrorStatus;
 }
 
-/******************************************** Interrupt Handlers ********************************************/
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                            	  INTERRUPT HANDLERS		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /************************************************/
 /* 	ADC Conversion Complete Interrupt	*/
