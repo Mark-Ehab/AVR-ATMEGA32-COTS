@@ -28,3 +28,23 @@ s32 SERV_s32Map(  s32 Copy_s32InputMin  , s32 Copy_s32InputMax
 
 	return Local_s32MappingResult;
 }
+/**********************************************************************************/
+/* Description     : Function to get modulus of two numbers			  */
+/* Input Arguments : f32 Copy_f32Num1 , f32 Copy_f32Num2		          */
+/* Return          : f32						          */
+/**********************************************************************************/
+f32 SERV_f32Mod(f32 Copy_f32Num1 , f32 Copy_f32Num2)
+{
+        f32 Local_f32Result = Copy_f32Num1 - ((u32)(Copy_f32Num1/Copy_f32Num2) * Copy_f32Num2);
+        return Local_f32Result;
+}
+/**********************************************************************************/
+/* Description     : Function to get ceil of the result of two dividend numbers   */
+/* Input Arguments : f32 Copy_f32Num1 , f32 Copy_f32Num2		          */
+/* Return          : u32  	        	      			          */
+/**********************************************************************************/
+u32 SERV_u32CeilDev(f32 Copy_f32Num1 , f32 Copy_f32Num2)
+{
+	  u32 Local_u32Result = (u32)(Copy_f32Num1/Copy_f32Num2) + (SERV_f32Mod(Copy_f32Num1,Copy_f32Num2)!= 0);
+	  return Local_u32Result;
+}
