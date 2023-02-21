@@ -75,10 +75,10 @@ void EXTI_vidEXTI0Init(void)
 	/* Check EXTI0 Enable Signal Whether its Enable or Disable */
 	#if   EXTI_EXTI0_ENABLE == ENABLE
 	      /* Enable EXTI0 */
-	      SET_BIT(GICR,EXTI_INT0);
+	      SET_BIT(GICR,GICR_INT0);
 	#elif EXTI_EXTI0_ENABLE == DISABLE
 	      /* Disable EXTI0 */
-	      CLR_BIT(GICR,EXTI_INT0);
+	      CLR_BIT(GICR,GICR_INT0);
 	#else
 		#error " Wrong External Interrupt 0 Enable Signal Configuration"
 	#endif
@@ -128,10 +128,10 @@ void EXTI_vidEXTI1Init(void)
         /* Check EXTI1 Enable Signal Whether its Enable or Disable */
         #if   EXTI_EXTI1_ENABLE == ENABLE
               /* Enable EXTI1 */
-              SET_BIT(GICR,EXTI_INT1);
+              SET_BIT(GICR,GICR_INT1);
         #elif EXTI_EXTI1_ENABLE == DISABLE
               /* Disable EXTI1 */
-              CLR_BIT(GICR,EXTI_INT1);
+              CLR_BIT(GICR,GICR_INT1);
         #else
         	#error " Wrong External Interrupt 1 Enable Signal Configuration"
         #endif
@@ -171,10 +171,10 @@ void EXTI_vidEXTI2Init(void)
         /* Check EXTI2 Enable Signal Whether its Enable or Disable */
         #if   EXTI_EXTI2_ENABLE == ENABLE
               /* Enable EXTI2 */
-              SET_BIT(GICR,EXTI_INT2);
+              SET_BIT(GICR,GICR_INT2);
         #elif EXTI_EXTI2_ENABLE == DISABLE
               /* Disable EXTI2 */
-              CLR_BIT(GICR,EXTI_INT2);
+              CLR_BIT(GICR,GICR_INT2);
         #else
         	#error " Wrong External Interrupt 2 Enable Signal Configuration"
         #endif
@@ -187,7 +187,7 @@ void EXTI_vidEXTI2Init(void)
 void EXTI_vidEXTI0Enable(void)
 {
 	/* Enable EXTI0 */
-	SET_BIT(GICR,EXTI_INT0);
+	SET_BIT(GICR,GICR_INT0);
 }
 /**********************************************************************************/
 /* Description     : Enable External Interrupt 1				  */
@@ -197,7 +197,7 @@ void EXTI_vidEXTI0Enable(void)
 void EXTI_vidEXTI1Enable(void)
 {
 	/* Enable EXTI1 */
-	SET_BIT(GICR,EXTI_INT1);
+	SET_BIT(GICR,GICR_INT1);
 }
 /**********************************************************************************/
 /* Description     : Enable External Interrupt 2				  */
@@ -207,7 +207,7 @@ void EXTI_vidEXTI1Enable(void)
 void EXTI_vidEXTI2Enable(void)
 {
 	/* Enable EXTI2 */
-	SET_BIT(GICR,EXTI_INT2);
+	SET_BIT(GICR,GICR_INT2);
 }
 /**********************************************************************************/
 /* Description     : Disable External Interrupt 0				  */
@@ -217,7 +217,7 @@ void EXTI_vidEXTI2Enable(void)
 void EXTI_vidEXTI0Disable(void)
 {
 	/* Disable EXTI0 */
-	CLR_BIT(GICR,EXTI_INT0);
+	CLR_BIT(GICR,GICR_INT0);
 }
 /**********************************************************************************/
 /* Description     : Disable External Interrupt 1				  */
@@ -227,7 +227,7 @@ void EXTI_vidEXTI0Disable(void)
 void EXTI_vidEXTI1Disable(void)
 {
 	/* Disable EXTI1 */
-	CLR_BIT(GICR,EXTI_INT1);
+	CLR_BIT(GICR,GICR_INT1);
 }
 /**********************************************************************************/
 /* Description     : Disable External Interrupt 2				  */
@@ -237,7 +237,7 @@ void EXTI_vidEXTI1Disable(void)
 void EXTI_vidEXTI2Disable(void)
 {
 	/* Disable EXTI2 */
-        CLR_BIT(GICR,EXTI_INT2);
+        CLR_BIT(GICR,GICR_INT2);
 }
 /**********************************************************************************/
 /* Description     : Set sense control action based on which EXTI0 will be 	  */

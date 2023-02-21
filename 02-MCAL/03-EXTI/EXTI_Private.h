@@ -23,21 +23,27 @@
 
 /*-----------------------------------------------------------------------------------*/
 /*                                                                                   */
-/*                           	   PRIVATE MACROS				     */
+/*                              SOME BITS DEFINITIONS		 	             */
 /*                                                                                   */
 /*-----------------------------------------------------------------------------------*/
 
 /* Bit Definitions of General Interrupt Control Register (GICR) */
-#define EXTI_INT2			       	   5 /* External Interrupt Request 2 Enable */
-#define EXTI_INT0			           6 /* External Interrupt Request 0 Enable */
-#define EXTI_INT1				   7 /* External Interrupt Request 1 Enable */
+#define GICR_INT2			       	   5 /* External Interrupt Request 2 Enable */
+#define GICR_INT0			           6 /* External Interrupt Request 0 Enable */
+#define GICR_INT1				   7 /* External Interrupt Request 1 Enable */
 
 
 /* Bit Definitions of General Interrupt Flag Register (GIFR) */
-#define EXTI_INTF2			       	   5 /* External Interrupt Flag 2 */
-#define EXTI_INTF0			           6 /* External Interrupt Flag 0 */
-#define EXTI_INTF1				   7 /* External Interrupt Flag 1 */
+#define GIFR_INTF2			       	   5 /* External Interrupt Flag 2 */
+#define GIFR_INTF0			           6 /* External Interrupt Flag 0 */
+#define GIFR_INTF1				   7 /* External Interrupt Flag 1 */
 
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	   PRIVATE MACROS				     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /* EXTI0 Sense Controls Values */
 #define EXTI_EXTI0_SENSE_CONTROL_MASK		   0b11111100 /*  Mask of EXTI0 Sense Control Bits  */

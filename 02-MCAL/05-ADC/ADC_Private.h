@@ -24,6 +24,24 @@
 
 /*-----------------------------------------------------------------------------------*/
 /*                                                                                   */
+/*                              SOME BITS DEFINITIONS		 	             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
+/* Some bit definitions of ADC Multiplexer Selection Register (ADMUX) */
+#define ADMUX_ADLAR                            5 /* ADC Left Adjust Result */
+
+
+/* Some bit definitions of ADC Control and Status Register A (ADCSRA) */
+#define ADCSRA_ADIE                             3 /* ADC Interrupt Enable */
+#define ADCSRA_ADIF                             4 /* ADC Interrupt Flag */
+#define ADCSRA_ADATE                            5 /* ADC Auto-Trigger Enable */
+#define ADCSRA_ADSC                             6 /* ADC Start Conversion */
+#define ADCSRA_ADEN                             7 /* ADC Enable */
+
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
 /*                           	   PRIVATE MACROS				     */
 /*                                                                                   */
 /*-----------------------------------------------------------------------------------*/
@@ -37,18 +55,6 @@
 #define ADC_AVCC                             0b01000000 /* AVCC with external capacitor at AREF pin */
 #define ADC_INTERNAL_VOLT                    0b11000000 /* Internal 2.56V Voltage Reference with external capacitor at AREF pin */
 #define ADC_REF_VOLT_MASK                    0b00111111 /* Mask of ADC Reference Voltage */
-
-
-/* Some bit definitions of ADC Multiplexer Selection Register (ADMUX) */
-#define ADC_ADLAR                            5 /* ADC Left Adjust Result */
-
-
-/* Some bit definitions of ADC Control and Status Register A (ADCSRA) */
-#define ADC_ADIE                             3 /* ADC Interrupt Enable */
-#define ADC_ADIF                             4 /* ADC Interrupt Flag */
-#define ADC_ADATE                            5 /* ADC Auto-Trigger Enable */
-#define ADC_ADSC                             6 /* ADC Start Conversion */
-#define ADC_ADEN                             7 /* ADC Enable */
 
 
 /* ADC CLK Pre-scaler Selections */
@@ -72,6 +78,7 @@
 #define ADC_TIMER1_OVERFLOW                  0b11000000 /* Timer/Counter1 Overflow */
 #define ADC_TIMER1_CAPTURE_EVENT             0b11100000 /* Timer/Counter1 Capture Event */
 #define ADC_AUTO_TRIGGER_SOURCE_MASK         0b00011111 /* Mask of Auto-Trigger Source */
+
 
 /* ADC Status Options */
 #define ADC_IDLE                             0 /* Status tells that ADC peripheral is available to start conversion */

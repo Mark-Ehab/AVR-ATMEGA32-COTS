@@ -52,7 +52,7 @@ static void(*ADC_pvConversionCompleteNotificationFunc)(void) = NULL;
 /**********************************************************************************/
 static void ADC_vidStartConversion(void)
 {
-	SET_BIT(ADCSRA,ADC_ADSC);
+	SET_BIT(ADCSRA,ADCSRA_ADSC);
 }
 /**********************************************************************************/
 /* Description     : Enable ADC conversion complete interrupt                 	  */
@@ -61,7 +61,7 @@ static void ADC_vidStartConversion(void)
 /**********************************************************************************/
 static void ADC_vidEnableInterrupt(void)
 {
-	SET_BIT(ADCSRA,ADC_ADIE);
+	SET_BIT(ADCSRA,ADCSRA_ADIE);
 }
 /**********************************************************************************/
 /* Description     : Disable ADC conversion complete interrupt                 	  */
@@ -70,7 +70,7 @@ static void ADC_vidEnableInterrupt(void)
 /**********************************************************************************/
 static void ADC_vidDisableInterrupt(void)
 {
-	CLR_BIT(ADCSRA,ADC_ADIE);
+	CLR_BIT(ADCSRA,ADCSRA_ADIE);
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -105,9 +105,9 @@ void ADC_vidInit(void)
    /******************************************Set ADC Result Adjustment*****************************************/
    /* Check if ADC result in ADC data registers (ADCH,ADCL) is left adjusted or not */
    #if   ADC_RESULT_ADJUSTMENT == RIGHT_ADJUSTMENT
-	CLR_BIT(ADMUX,ADC_ADLAR);
+	CLR_BIT(ADMUX,ADMUX_ADLAR);
    #elif ADC_RESULT_ADJUSTMENT == LEFT_ADJUSTMENT
-	SET_BIT(ADMUX,ADC_ADLAR);
+	SET_BIT(ADMUX,ADMUX_ADLAR);
    #else
 	#error "Wrong ADC Result Adjustment Configuration"
    #endif
@@ -117,7 +117,7 @@ void ADC_vidInit(void)
    /* Check if ADC auto-trigger is enabled or not */
    #if   ADC_AUTO_TRIGGER == AUTO_TRIGGER_ENABLE
 	/* Enable Auto-Trigger */
-	SET_BIT(ADCSRA,ADC_ADATE);
+	SET_BIT(ADCSRA,ADCSRA_ADATE);
 	/* Clear Auto-Trigger Source Selection Bits */
 	SFIOR &= ADC_AUTO_TRIGGER_SOURCE_MASK;
 	/* Check Selected Auto Trigger Source */
@@ -154,7 +154,7 @@ void ADC_vidInit(void)
 	#endif
    #elif ADC_AUTO_TRIGGER == AUTO_TRIGGER_DISABLE
 	/* Disable Auto-Trigger and Select ADC Single Conversion Mode */
-	CLR_BIT(ADCSRA,ADC_ADATE);
+	CLR_BIT(ADCSRA,ADCSRA_ADATE);
    #else
 	#error "Wrong ADC Auto-Trigger Configuration"
    #endif
@@ -195,7 +195,7 @@ void ADC_vidInit(void)
 
 
    /* Enable ADC */
-   SET_BIT(ADCSRA,ADC_ADEN);
+   SET_BIT(ADCSRA,ADCSRA_ADEN);
 
 
    /* Check if Free Running Mode is Enabled or Not to Start Conversion */
@@ -242,7 +242,7 @@ u8 ADC_u8GetAdcReadingSyncSingleConversion(u8 Copy_u8ChannelNum , u16* Copy_pu16
   		  ADC_vidStartConversion();
 
   		  /* Polling (busy waiting) over ADC Conversion Complete Interrupt Flag untill it's set to 1 or when ADC reaches Timeout */
-  		  while((GET_BIT(ADCSRA,ADC_ADIF) == 0) && (Local_u32AdcTimeOutCounter < ADC_TIMEOUT))
+  		  while((GET_BIT(ADCSRA,ADCSRA_ADIF) == 0) && (Local_u32AdcTimeOutCounter < ADC_TIMEOUT))
   		  {
   			  Local_u32AdcTimeOutCounter++;
   		  }
@@ -255,7 +255,7 @@ u8 ADC_u8GetAdcReadingSyncSingleConversion(u8 Copy_u8ChannelNum , u16* Copy_pu16
   		  else
   		  {
   			  /* Clear ADC Conversion Complete Interrupt Flag By Writing 1 to ADIF Bit */
-  			  SET_BIT(ADCSRA,ADC_ADIF);
+  			  SET_BIT(ADCSRA,ADCSRA_ADIF);
 
   			  /* Check ADC bit resolution based on configuration to build its functions */
   			  #if    ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION
@@ -372,7 +372,7 @@ u8 ADC_u8GetAdcReadingSyncFreeRunning(u16* Copy_pu16Reading)
    else
    {
 	   /* Polling (busy waiting) over ADC Conversion Complete Interrupt Flag untill it's set to 1 or when ADC reaches Timeout */
-	   while((GET_BIT(ADCSRA,ADC_ADIF) == 0) && (Local_u32AdcTimeOutCounter < ADC_TIMEOUT))
+	   while((GET_BIT(ADCSRA,ADCSRA_ADIF) == 0) && (Local_u32AdcTimeOutCounter < ADC_TIMEOUT))
 	   {
 	 	   Local_u32AdcTimeOutCounter++;
 	   }
@@ -385,7 +385,7 @@ u8 ADC_u8GetAdcReadingSyncFreeRunning(u16* Copy_pu16Reading)
 	   else
 	   {
 		   /* Clear ADC Conversion Complete Interrupt Flag By Writing 1 to ADIF Bit */
-		   SET_BIT(ADCSRA,ADC_ADIF);
+		   SET_BIT(ADCSRA,ADCSRA_ADIF);
 
 		   /* Check ADC bit resolution based on configuration to build its functions */
 		   #if    ADC_BIT_RESOLUTION == EIGHT_BIT_RESOLUTION

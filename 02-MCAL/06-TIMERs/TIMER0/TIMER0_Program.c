@@ -201,10 +201,10 @@ void TIMER0_vidInit(void)
        /* Check if Timer0 overflow interrupt is enabled or not from config file */
        #if   TIMER0_OVERFLOW_INTERRUPT_ENABLE == ENABLE
 		    /* Enable Timer0 Overflow Interrupt */
-		    SET_BIT(TIMSK,TIMER0_TOIE0);
+		    SET_BIT(TIMSK,TIMSK_TOIE0);
        #elif TIMER0_OVERFLOW_INTERRUPT_ENABLE == DISABLE
 		    /* Disable Timer0 Overflow Interrupt */
-		    CLR_BIT(TIMSK,TIMER0_TOIE0);
+		    CLR_BIT(TIMSK,TIMSK_TOIE0);
        #else
        	       #error "Wrong Timer0 Overflow Interrupt Enable Signal Configuration !"
        #endif
@@ -212,10 +212,10 @@ void TIMER0_vidInit(void)
        /* Check if Timer0 compare match interrupt is enabled or not from config file */
        #if   TIMER0_COMPARE_MATCH_INTERRUPT_ENABLE == ENABLE
 		    /* Enable Timer0 Compare Match Interrupt */
-		    SET_BIT(TIMSK,TIMER0_OCIE0);
+		    SET_BIT(TIMSK,TIMSK_OCIE0);
        #elif TIMER0_COMPARE_MATCH_INTERRUPT_ENABLE == DISABLE
 		    /* Disable Timer0 Compare Match Interrupt */
-		    CLR_BIT(TIMSK,TIMER0_OCIE0);
+		    CLR_BIT(TIMSK,TIMSK_OCIE0);
        #else
        	       #error "Wrong Timer0 Compare Match Interrupt Enable Signal Configuration !"
        #endif
@@ -294,7 +294,7 @@ void TIMER0_vidSetCompareMatchValue(u8 Copy_u8CompareMatchValue)
 void TIMER0_vidEnableOverflowInterrupt(void)
 {
 	/* Enable Timer0 Overflow Interrupt */
-	SET_BIT(TIMSK,TIMER0_TOIE0);
+	SET_BIT(TIMSK,TIMSK_TOIE0);
 }
 /**********************************************************************************/
 /* Description     : Disable Timer0 Overflow Interrupt			          */
@@ -304,7 +304,7 @@ void TIMER0_vidEnableOverflowInterrupt(void)
 void TIMER0_vidDisableOverflowInterrupt(void)
 {
 	/* Disable Timer0 Overflow Interrupt */
-	CLR_BIT(TIMSK,TIMER0_TOIE0);
+	CLR_BIT(TIMSK,TIMSK_TOIE0);
 }
 /**********************************************************************************/
 /* Description     : Enable Timer0 Compare Match Interrupt		          */
@@ -314,7 +314,7 @@ void TIMER0_vidDisableOverflowInterrupt(void)
 void TIMER0_vidEnableCompareMatchInterrupt(void)
 {
 	/* Enable Timer0 Compare Match Interrupt */
-	SET_BIT(TIMSK,TIMER0_OCIE0);
+	SET_BIT(TIMSK,TIMSK_OCIE0);
 }
 /**********************************************************************************/
 /* Description     : Disable Timer0 Compare Match Interrupt		          */
@@ -324,7 +324,7 @@ void TIMER0_vidEnableCompareMatchInterrupt(void)
 void TIMER0_vidDisableCompareMatchInterrupt(void)
 {
 	/* Disable Timer0 Compare Match Interrupt */
-	CLR_BIT(TIMSK,TIMER0_OCIE0);
+	CLR_BIT(TIMSK,TIMSK_OCIE0);
 }
 /**********************************************************************************/
 /* Description     : Register application callback function that will be called   */
@@ -416,10 +416,10 @@ u8 TIMER0_u8SetBusyWait_ms(u32 Copy_u32DelayTime_ms)
 		while(Local_u32OverflowCounter < Local_u32OverflowNum)
 		{
 			/* Wait until TOV0 Flag is set by hardware */
-			while(GET_BIT(TIFR,TIMER0_TOV0) != 1);
+			while(GET_BIT(TIFR,TIFR_TOV0) != 1);
 
 			/* Clear TOV0 Flag by writing 1 to its bit in TIFR Register */
-			SET_BIT(TIFR,TIMER0_TOV0);
+			SET_BIT(TIFR,TIFR_TOV0);
 
 			/* Increment Overflow Counter */
 			Local_u32OverflowCounter++;

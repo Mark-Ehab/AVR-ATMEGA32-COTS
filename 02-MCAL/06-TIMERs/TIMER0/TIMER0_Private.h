@@ -24,6 +24,22 @@
 
 /*-----------------------------------------------------------------------------------*/
 /*                                                                                   */
+/*                              SOME BITS DEFINITIONS		 	             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
+/* Some Bits Definitions of Timer/Counter Interrupt Mask Register (TIMSK) */
+#define TIMSK_TOIE0 						     0 /* Timer/Counter0 Overflow Interrupt Enable */
+#define TIMSK_OCIE0						     1 /* Timer/Counter0 Output Compare Match Interrupt Enable */
+
+
+/* Some Bits Definitions of Timer/Counter Interrupt Flag Register (TIFR) */
+#define TIFR_TOV0 						     0 /* Timer/Counter0 Overflow Flag */
+#define TIFR_OCF0						     1 /* Output Compare Flag 0 */
+
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
 /*                           	   PRIVATE MACROS				     */
 /*                                                                                   */
 /*-----------------------------------------------------------------------------------*/
@@ -64,16 +80,6 @@
 #define TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_DISCONNECTED         0b00000000 /* Timer0 Output Compare Match Pin is Disconnect */
 #define TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_NON_INVERTED_MODE    0b00100000 /* Clear OC0 on compare match when up-counting. Set OC0 on compare match when downcounting */
 #define TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_INVERTED_MODE        0b00110000 /* Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting */
-
-
-/* Some Bits Definitions of Timer/Counter Interrupt Mask Register (TIMSK) */
-#define TIMER0_TOIE0 						     0 /* Timer/Counter0 Overflow Interrupt Enable */
-#define TIMER0_OCIE0						     1 /* Timer/Counter0 Output Compare Match Interrupt Enable */
-
-
-/* Some Bits Definitions of Timer/Counter Interrupt Flag Register (TIFR) */
-#define TIMER0_TOV0 						     0 /* Timer/Counter0 Overflow Flag */
-#define TIMER0_OCF0						     1 /* Output Compare Flag 0 */
 
 
 /* Mask of Timer0 Clock Selection Bits */
