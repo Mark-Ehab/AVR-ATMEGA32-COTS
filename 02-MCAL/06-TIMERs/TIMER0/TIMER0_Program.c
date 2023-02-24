@@ -182,13 +182,13 @@ void TIMER0_vidInit(void)
 	      /* Check mode of Timer0 output compare match pin (Phase-Correct PWM) */
 	      #if   TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_MODE == DISCONNECTED
 		    /* Disconnect Timer0 output compare match pin */
-		    TCCR0 |= TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_DISCONNECTED;
+		    TCCR0 |= TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_DISCONNECTED;
 	      #elif TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_MODE == NON_INVERTED_MODE
 		    /* Set Timer0 Phase Correct PWM to Operate in Non Inverted Mode */
-		    TCCR0 |= TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_NON_INVERTED_MODE;
+		    TCCR0 |= TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_NON_INVERTED_MODE;
 	      #elif TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_MODE == INVERTED_MODE
 		    /* Set Timer0 Phase Correct PWM to Operate in Inverted Mode */
-		    TCCR0 |= TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_INVERTED_MODE;
+		    TCCR0 |= TIMER0_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_INVERTED_MODE;
 	      #else
 		      #error "Wrong Timer0 Output Compare Match Pin (Phase-Correct PWM) Configuration !"
 	      #endif
