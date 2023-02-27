@@ -48,6 +48,7 @@
 /* Some Bits Definitions of Timer/Counter1 Control Register B (TCCR1B) */
 #define TCCR1B_WGM12						             3 /* Waveform Generation Bit 2 */
 #define TCCR1B_WGM13						             4 /* Waveform Generation Bit 3 */
+#define TCCR1B_ICES1							     6 /* Input Capture Edge Select */
 
 
 /* Some Bits Definitions of Timer/Counter Interrupt Mask Register (TIMSK) */
@@ -174,6 +175,11 @@
 /* Output Compare Match Pin Modes Options for Both Channels A&B (Phase Correct & Fast PWM) */
 #define NON_INVERTED_MODE                                                    1
 #define INVERTED_MODE                                                        2
+
+
+/* Timer1 Input Capture Event Trigger Edge Possible Values */
+#define FALLING_EDGE							     1
+#define RISING_EDGE 							     2
 
 
 /* Enable/Disable signals for Overflow, Compare Match A, Compare Match B and Capture Event Interrupts of Timer1 */

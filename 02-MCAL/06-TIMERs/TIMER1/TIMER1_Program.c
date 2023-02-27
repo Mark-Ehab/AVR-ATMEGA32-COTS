@@ -651,6 +651,28 @@ void TIMER1_vidInit(void)
 		#error "Wrong Timer1 Mode Configuration !"
 	#endif
 
+
+	/******************************************Initialize Input Capture Unit (If Enabled)*****************************************/
+	/* Check if Timer1 Hardware ICU Mode is Enabled or Not  */
+	#if TIMER1_ICU_ENABLE == ENABLE
+		/* Check selected Timer1 mode from config file */
+		#if TIMER1_MODE != PHASE_FREQUENCY_CORRECT_PWM_ICR1_MODE && TIMER1_MODE != PHASE_CORRECT_PWM_ICR1_MODE && TIMER1_MODE != CTC_ICR1_MODE && TIMER1_MODE != FAST_PWM_ICR1_MODE
+				/* Clear ICES1 Bit in TCCR1B */
+				CLR_BIT(TCCR1B,TCCR1B_ICES1);
+
+				/* Check Timer1 Input Capture Event Trigger Edge Type */
+				#if   TIMER1_ICU_TRIGGER_EDGE == FALLING_EDGE
+					/* Set Timer1 Input Capture Event Trigger Edge as Falling Edge */
+					CLR_BIT(TCCR1B,TCCR1B_ICES1);
+				#elif TIMER1_ICU_TRIGGER_EDGE == RISING_EDGE
+					/* Set Timer1 Input Capture Event Trigger Edge as Rising Edge */
+					SET_BIT(TCCR1B,TCCR1B_ICES1);
+				#else
+					#error "Wrong Timer1 Input Capture Event Trigger Edge Configuration !"
+				#endif
+		#endif
+	#endif
+
         /******************************************Enable/Disable Timer1 Interrupts*****************************************/
 	/* Check if Timer1 overflow interrupt is enabled or not from config file */
 	#if   TIMER1_OVERFLOW_INTERRUPT_ENABLE == ENABLE
@@ -794,6 +816,16 @@ u16 TIMER1_u16ReadTimerValue(void)
 	return TCNT1;
 }
 /**********************************************************************************/
+/* Description     : Read Timer1 Input Capture Value			          */
+/* Input Arguments : void                                                         */
+/* Return          : void                                		          */
+/**********************************************************************************/
+u16 TIMER1_u16ReadInputCaptureValue(void)
+{
+	/* Return Timer1 Input Capture Value */
+	return ICR1;
+}
+/**********************************************************************************/
 /* Description     : Enable Timer1 Overflow Interrupt			          */
 /* Input Arguments : void                                                         */
 /* Return          : void                                		          */
@@ -872,6 +904,54 @@ void TIMER1_vidDisableCaptureEventInterrupt(void)
 {
 	/* Disable Timer1 capture event interrupt */
 	CLR_BIT(TIMSK,TIMSK_TICIE1);
+}
+/**********************************************************************************/
+/* Description     : Set Timer1 Input Capture Event Trigger Edge 		  */
+/* 		     (Rising or Falling) Edge				          */
+/* Input Arguments : TIMER1_ICUTriggerEdge_e Copy_EdgeType_e         	          */
+/* Return          : u8                   			                  */
+/**********************************************************************************/
+u8 TIMER1_u8SetInputCaptureEventEdge(TIMER1_ICUTriggerEdge_e Copy_EdgeType_e)
+{
+	/* Local Variables Definitions */
+	u8 Local_u8ErrorStatus = RT_OK;   	/* A variable to hold function error status */
+	u8 Local_u8TCCR1BTemp; 			/* Temporary Variable to Hold Current TCCR1B Register Value */
+
+	/* Read Current Value of TCCR1B Register then Assign it to Local_u8TCCR1BTemp */
+	Local_u8TCCR1BTemp = TCCR1B;
+
+	/* Clear ICES1 Bit in TCCR1B */
+	CLR_BIT(Local_u8TCCR1BTemp,TCCR1B_ICES1);
+
+	/* Check if passed value is valid or not */
+	switch(Copy_EdgeType_e)
+	{
+	case TIMER1_ICU_FALLING_EDGE:
+
+		/* Set Timer1 Input Capture Event Trigger Edge as Falling Edge */
+		CLR_BIT(Local_u8TCCR1BTemp,TCCR1B_ICES1);
+
+		/* Write Modified Value of Local_u8TCCR1BTemp Back Again to TCCR1B Register */
+		TCCR1B = Local_u8TCCR1BTemp;
+
+		break;
+
+	case TIMER1_ICU_RISING_EDGE:
+
+		/* Set Timer1 Input Capture Event Trigger Edge as Falling Edge */
+		SET_BIT(Local_u8TCCR1BTemp,TCCR1B_ICES1);
+
+		/* Write Modified Value of Local_u8TCCR1BTemp Back Again to TCCR1B Register */
+		TCCR1B = Local_u8TCCR1BTemp;
+
+		break;
+
+	default:
+
+	         /* Function is not working as expected */
+	         Local_u8ErrorStatus = RT_NOK;
+	}
+	return Local_u8ErrorStatus;
 }
 /**********************************************************************************/
 /* Description     : Register application callback function that will be called   */

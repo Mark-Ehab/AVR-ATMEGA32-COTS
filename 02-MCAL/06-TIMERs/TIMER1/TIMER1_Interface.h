@@ -11,6 +11,24 @@
         
 /*-----------------------------------------------------------------------------------*/
 /*                                                                                   */
+/*                       DEFINING NEW TYPES FOR INTERFACING		             */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
+
+/*
+ * Define new enum type for Timer1 Input Capture Event Trigger Edges which are :
+ * 1) Generate Input Capture Event request on The Falling Edge
+ * 2) Generate Input Capture Event request on The Rising Edge
+ */
+typedef enum
+{
+	TIMER1_ICU_FALLING_EDGE   = 1,
+	TIMER1_ICU_RISING_EDGE    = 2
+}TIMER1_ICUTriggerEdge_e;
+
+
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
 /*                           	 FUNCTIONS PROTOTYPES		                     */
 /*                                                                                   */
 /*-----------------------------------------------------------------------------------*/
@@ -66,6 +84,12 @@ void TIMER1_vidSetInputCaptureValue(u16 Copy_u16InputCaptureValue);
 /**********************************************************************************/
 u16 TIMER1_u16ReadTimerValue(void);
 /**********************************************************************************/
+/* Description     : Read Timer1 Input Capture Value			          */
+/* Input Arguments : void                                                         */
+/* Return          : void                                		          */
+/**********************************************************************************/
+u16 TIMER1_u16ReadInputCaptureValue(void);
+/**********************************************************************************/
 /* Description     : Enable Timer1 Overflow Interrupt			          */
 /* Input Arguments : void                                                         */
 /* Return          : void                                		          */
@@ -113,6 +137,13 @@ void TIMER1_vidEnableCaptureEventInterrupt(void);
 /* Return          : void                    			                  */
 /**********************************************************************************/
 void TIMER1_vidDisableCaptureEventInterrupt(void);
+/**********************************************************************************/
+/* Description     : Set Timer1 Input Capture Event Trigger Edge 		  */
+/* 		     (Rising or Falling) Edge				          */
+/* Input Arguments : TIMER1_ICUTriggerEdge_e Copy_EdgeType_e         		  */
+/* Return          : u8                   			                  */
+/**********************************************************************************/
+u8 TIMER1_u8SetInputCaptureEventEdge(TIMER1_ICUTriggerEdge_e Copy_EdgeType_e);
 /**********************************************************************************/
 /* Description     : Register application callback function that will be called   */
 /*		     immediately once Timer1 overflow ISR is triggered		  */

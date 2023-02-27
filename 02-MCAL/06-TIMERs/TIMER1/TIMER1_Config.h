@@ -116,6 +116,25 @@
 /*********************************************************/
 #define TIMER1_PHASE_CORRECT_PWM_OUTPUT_COMPARE_PIN_CHB_MODE DISCONNECTED /* Default : DISCONNECTED */
 /*********************************************************/
+/* Enable/Disable Timer1 ICU Mode:- 			 */
+/*  							 */
+/* Options : - ENABLE             	                 */
+/* 	     - DISABLE                	                 */
+/*							 */
+/*********************************************************/
+#define TIMER1_ICU_ENABLE ENABLE /* Default : DISABLE */
+/*********************************************************/
+/* Select Timer1 Input Capture Event Trigger Edge Type:- */
+/*  							 */
+/* Options : - FALLING_EDGE                              */
+/* 	     - RISING_EDGE                               */
+/* 	                          		 	 */
+/* Note	   : Only selected when Timer ICU mode is 	 */
+/* 	     enabled				         */
+/*							 */
+/*********************************************************/
+#define TIMER1_ICU_TRIGGER_EDGE FALLING_EDGE /* Default: FALLING_EDGE */
+/*********************************************************/
 /* Enable/Disable Timer/Counter1 Overflow Interrupt :- 	 */
 /*  							 */
 /* Options : - ENABLE                                    */
@@ -147,7 +166,10 @@
 /*  							 */
 /* Options : - ENABLE                                    */
 /* 	     - DISABLE                                   */
-/* 	                          		 	 */
+/*							 */
+/* Note	   : Only selected when Timer ICU mode is 	 */
+/* 	     enabled				         */
+/*							 */
 /*********************************************************/
 #define TIMER1_CAPTURE_EVENT_INTERRUPT_ENABLE DISABLE /* Default : DISABLE */
 /*********************************************************/
