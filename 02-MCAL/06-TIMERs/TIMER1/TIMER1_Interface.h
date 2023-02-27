@@ -60,6 +60,12 @@ void TIMER1_vidSetCompareMatchBValue(u16 Copy_u16CompareMatchBValue);
 /**********************************************************************************/
 void TIMER1_vidSetInputCaptureValue(u16 Copy_u16InputCaptureValue);
 /**********************************************************************************/
+/* Description     : Read Timer/Counter1 Value				          */
+/* Input Arguments : void                                                         */
+/* Return          : u16                                		          */
+/**********************************************************************************/
+u16 TIMER1_u16ReadTimerValue(void);
+/**********************************************************************************/
 /* Description     : Enable Timer1 Overflow Interrupt			          */
 /* Input Arguments : void                                                         */
 /* Return          : void                                		          */

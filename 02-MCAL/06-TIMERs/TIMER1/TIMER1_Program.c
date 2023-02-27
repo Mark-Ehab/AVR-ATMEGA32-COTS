@@ -784,6 +784,16 @@ void TIMER1_vidSetInputCaptureValue(u16 Copy_u16InputCaptureValue)
 	ICR1 = Copy_u16InputCaptureValue;
 }
 /**********************************************************************************/
+/* Description     : Read Timer/Counter1 Value				          */
+/* Input Arguments : void                                                         */
+/* Return          : u16                                		          */
+/**********************************************************************************/
+u16 TIMER1_u16ReadTimerValue(void)
+{
+	/* Return Timer/Counter1 Value */
+	return TCNT1;
+}
+/**********************************************************************************/
 /* Description     : Enable Timer1 Overflow Interrupt			          */
 /* Input Arguments : void                                                         */
 /* Return          : void                                		          */

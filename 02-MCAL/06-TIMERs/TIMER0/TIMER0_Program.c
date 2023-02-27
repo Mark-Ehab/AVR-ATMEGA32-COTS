@@ -287,6 +287,16 @@ void TIMER0_vidSetCompareMatchValue(u8 Copy_u8CompareMatchValue)
 	OCR0 = Copy_u8CompareMatchValue;
 }
 /**********************************************************************************/
+/* Description     : Read Timer/Counter0 Value				          */
+/* Input Arguments : void                                                         */
+/* Return          : u8	                                		          */
+/**********************************************************************************/
+u8 TIMER0_u8ReadTimerValue(void)
+{
+	/* Return Timer/Counter0 Value */
+	return TCNT0;
+}
+/**********************************************************************************/
 /* Description     : Enable Timer0 Overflow Interrupt			          */
 /* Input Arguments : void                                                         */
 /* Return          : void                                		          */
@@ -360,13 +370,13 @@ u8 TIMER0_u8SetOverflowCallback(void(*Copy_pvTIMER0OverflowFunc)(void))
 u8 TIMER0_u8SetCompareMatchCallback(void(*Copy_pvTIMER0CompareMatchFunc)(void))
 {
 	/* Define Some Local Variables */
-	u8 Local_u8ErrorState = RT_OK;     /* A variable to hold function error status */
+	u8 Local_u8ErrorStatus = RT_OK;     /* A variable to hold function error status */
 
 	/* Check if passed pointer to function is null pointer or not */
 	if(Copy_pvTIMER0CompareMatchFunc == NULL)
 	{
 		/* Passed Pointer is NULL Pointer */
-		Local_u8ErrorState = NULL_POINTER;
+		Local_u8ErrorStatus = NULL_POINTER;
 	}
 	else
 	{
@@ -374,7 +384,7 @@ u8 TIMER0_u8SetCompareMatchCallback(void(*Copy_pvTIMER0CompareMatchFunc)(void))
 		TIMER0_pvComapareMatchCallbakFunc = Copy_pvTIMER0CompareMatchFunc;
 	}
 
-	return Local_u8ErrorState;
+	return Local_u8ErrorStatus;
 }
 /**********************************************************************************/
 /* Description     : A function used to delay the processor for some time in      */
@@ -385,7 +395,7 @@ u8 TIMER0_u8SetCompareMatchCallback(void(*Copy_pvTIMER0CompareMatchFunc)(void))
 u8 TIMER0_u8SetBusyWait_ms(u32 Copy_u32DelayTime_ms)
 {
 	/* Define Some Local Variables */
-	u8 Local_u8ErrorState = RT_OK;     		/* A variable to hold function error status */
+	u8 Local_u8ErrorStatus = RT_OK;     		/* A variable to hold function error status */
 
 	if(Copy_u32DelayTime_ms < 4294967296)
 	{
@@ -431,10 +441,10 @@ u8 TIMER0_u8SetBusyWait_ms(u32 Copy_u32DelayTime_ms)
 	else
 	{
 		/* Function is not working as expected */
-		Local_u8ErrorState = RT_NOK;
+		Local_u8ErrorStatus = RT_NOK;
 	}
 
-	return Local_u8ErrorState;
+	return Local_u8ErrorStatus;
 }
 /**********************************************************************************/
 /* Description     : Start to generate PWM from Timer0			          */
@@ -444,7 +454,7 @@ u8 TIMER0_u8SetBusyWait_ms(u32 Copy_u32DelayTime_ms)
 u8 TIMER0_u8StartPWM(u8 Copy_u8DutyCyclePercentage)
 {
 	/* Define Some Local Variables */
-	u8 Local_u8ErrorState = RT_OK;     		/* A variable to hold function error status */
+	u8 Local_u8ErrorStatus = RT_OK;     		/* A variable to hold function error status */
 
 	if(Copy_u8DutyCyclePercentage <= 100)
 	{
@@ -457,10 +467,10 @@ u8 TIMER0_u8StartPWM(u8 Copy_u8DutyCyclePercentage)
 	else
 	{
 		/* Function is not working as expected */
-		Local_u8ErrorState = RT_NOK;
+		Local_u8ErrorStatus = RT_NOK;
 	}
 
-	return Local_u8ErrorState;
+	return Local_u8ErrorStatus;
 }
 
 /*-----------------------------------------------------------------------------------*/

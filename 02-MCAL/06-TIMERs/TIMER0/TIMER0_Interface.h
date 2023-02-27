@@ -48,6 +48,12 @@ void TIMER0_vidSetPreloadValue(u8 Copy_u8PreloadValue);
 /**********************************************************************************/
 void TIMER0_vidSetCompareMatchValue(u8 Copy_u8CompareMatchValue);
 /**********************************************************************************/
+/* Description     : Read Timer/Counter0 Value				          */
+/* Input Arguments : void                                                         */
+/* Return          : u8	                                		          */
+/**********************************************************************************/
+u8 TIMER0_u8ReadTimerValue(void);
+/**********************************************************************************/
 /* Description     : Enable Timer0 Overflow Interrupt			          */
 /* Input Arguments : void                                                         */
 /* Return          : void                                		          */
