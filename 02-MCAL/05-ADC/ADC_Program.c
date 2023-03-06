@@ -216,8 +216,8 @@ void ADC_vidInit(void)
 u8 ADC_u8GetAdcReadingSyncSingleConversion(u8 Copy_u8ChannelNum , u16* Copy_pu16Reading)
 {
    /* Defining Some Local Variables */
-   u8 Local_u8ErrorStatus = RT_OK;    /* A variable to hold function error status */
-   u8 Local_u32AdcTimeOutCounter = 0; /* A variable to hold ADC Timeout count */
+   u8  Local_u8ErrorStatus = RT_OK;    /* A variable to hold function error status */
+   u32 Local_u32AdcTimeOutCounter = 0; /* A variable to hold ADC Timeout count */
 
    /* Check if ADC is idle or busy */
    if(Global_u8AdcStatus == ADC_IDLE)
@@ -361,8 +361,8 @@ u8 ADC_u8GetAdcReadingAsyncSingleConversion(u8 Copy_u8ChannelNum , u16* Copy_pu1
 u8 ADC_u8GetAdcReadingSyncFreeRunning(u16* Copy_pu16Reading)
 {
    /* Defining Some Local Variables */
-   u8 Local_u8ErrorStatus = RT_OK;    /* A variable to hold function error status */
-   u8 Local_u32AdcTimeOutCounter = 0; /* A variable to hold ADC Timeout count */
+   u8  Local_u8ErrorStatus = RT_OK;    /* A variable to hold function error status */
+   u32 Local_u32AdcTimeOutCounter = 0; /* A variable to hold ADC Timeout count */
 
    /* Check if passed pointer is NULL pointer or not */
    if(Copy_pu16Reading == NULL)

@@ -673,6 +673,7 @@ void TIMER1_vidInit(void)
 		#endif
 	#endif
 
+
         /******************************************Enable/Disable Timer1 Interrupts*****************************************/
 	/* Check if Timer1 overflow interrupt is enabled or not from config file */
 	#if   TIMER1_OVERFLOW_INTERRUPT_ENABLE == ENABLE
