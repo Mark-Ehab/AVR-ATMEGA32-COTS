@@ -8,7 +8,11 @@
 #ifndef LIB_SERVICE_FUNCTIONS_H
 #define LIB_SERVICE_FUNCTIONS_H
 
-                                                        /* Functions Prototypes */
+/*-----------------------------------------------------------------------------------*/
+/*                                                                                   */
+/*                           	 FUNCTIONS PROTOTYPES		                     */
+/*                                                                                   */
+/*-----------------------------------------------------------------------------------*/
 
 /**********************************************************************************/
 /* Description     : This function is used to map a value in some input range to  */
@@ -33,5 +37,11 @@ f32 SERV_f32Mod(f32 Copy_f32Num1 , f32 Copy_f32Num2);
 /* Return          : u32  	        	      			          */
 /**********************************************************************************/
 u32 SERV_u32CeilDev(f32 Copy_f32Num1 , f32 Copy_f32Num2);
+/**********************************************************************************/
+/* Description     : Function to get the power of a number		          */
+/* Input Arguments : u32 Copy_u32Base , u32 Copy_u32Power		          */
+/* Return          : u32  	        	      			          */
+/**********************************************************************************/
+u32 SERV_u32Pow(u32 Copy_u32Base , u32 Copy_u32Power);
 
 #endif /* LIB_SERVICE_FUNCTIONS_H */
