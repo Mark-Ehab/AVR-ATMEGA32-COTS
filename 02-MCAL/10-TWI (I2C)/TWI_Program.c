@@ -249,11 +249,6 @@ TWI_ErrorStatus_e TWI_SendStartCondition(void)
 			/* Return Error */
 			Local_ErrorStatus = StartConditionError;
 		}
-		else
-		{
-			/* Clear TWI Start Condition (TWSTA) bit in TWCR register after Start Condition has been transmitted */
-			CLR_BIT(TWCR,TWCR_TWSTA);
-		}
 	}
 
 	return Local_ErrorStatus;
@@ -298,11 +293,6 @@ TWI_ErrorStatus_e TWI_SendRepeatedStartCondition(void)
 			/* Return Error */
 			Local_ErrorStatus = RepeatedStartConditionError;
 		}
-		else
-		{
-			/* Clear TWI Start Condition (TWSTA) bit in TWCR register after Repeated Start Condition has been transmitted */
-			CLR_BIT(TWCR,TWCR_TWSTA);
-		}
 	}
 
 	return Local_ErrorStatus;
@@ -319,10 +309,13 @@ TWI_ErrorStatus_e TWI_SendSlaveAddressWithWrite(u8 Copy_u8SlaveAddress)
 	u32 Local_u32TimeOutCounter = 0;  		  /* A variable to hold TWI Timeout count */
 
 	/* Write passed slave address on the bus through setting it in the most significant 7 bits of TWDR register */
-	TWDR = Copy_u8SlaveAddress << 1;
+	TWDR = (Copy_u8SlaveAddress << 1);
 
 	/* Clear LSB of TWDR register to send write option on the bus */
 	CLR_BIT(TWDR,TWDR_TWD0);
+
+	/* Clear TWI Start Condition (TWSTA) bit in TWCR register after Repeated Start Condition has been transmitted */
+	CLR_BIT(TWCR,TWCR_TWSTA);
 
 	/* Clear TWI interrupt flag through setting TWINT bit in TWCR register to start the previous operation */
 	SET_BIT(TWCR,TWCR_TWINT);
@@ -363,10 +356,13 @@ TWI_ErrorStatus_e TWI_SendSlaveAddressWithRead(u8 Copy_u8SlaveAddress)
 	u32 Local_u32TimeOutCounter = 0;  		  /* A variable to hold TWI Timeout count */
 
 	/* Write passed slave address on the bus through setting it in the most significant 7 bits of TWDR register */
-	TWDR = Copy_u8SlaveAddress << 1;
+	TWDR = (Copy_u8SlaveAddress << 1);
 
 	/* Set LSB of TWDR register to send read option on the bus */
 	SET_BIT(TWDR,TWDR_TWD0);
+
+	/* Clear TWI Start Condition (TWSTA) bit in TWCR register after Repeated Start Condition has been transmitted */
+	CLR_BIT(TWCR,TWCR_TWSTA);
 
 	/* Clear TWI interrupt flag through setting TWINT bit in TWCR register to start the previous operation */
 	SET_BIT(TWCR,TWCR_TWINT);

@@ -6,6 +6,7 @@
 /****************************************************************/
 
 #include "STD_TYPES.h"
+#include "SERVICE_FUNCTIONS.h"
 
 /*-----------------------------------------------------------------------------------*/
 /*                                                                                   */
@@ -30,7 +31,7 @@ s32 SERV_s32Map(  s32 Copy_s32InputMin  , s32 Copy_s32InputMax
 	f32 Local_f32Slope = (f32)(Copy_s32OutputMax - Copy_s32OutputMin)/(f32)(Copy_s32InputMax - Copy_s32InputMin); /* Slope */
 
 	/* Get Mapping Result From the Following Straight-Line Equation */
-	Local_s32MappingResult = (Local_f32Slope * (f32)Copy_s32InputVal) - (Local_f32Slope * (f32)Copy_s32InputMin) + (f32)Copy_s32OutputMin ;
+	Local_s32MappingResult = (Local_f32Slope * (f32)Copy_s32InputVal) - (Local_f32Slope * (f32)Copy_s32InputMin) + (f32)Copy_s32OutputMin;
 
 	return Local_s32MappingResult;
 }
@@ -45,7 +46,7 @@ f32 SERV_f32Mod(f32 Copy_f32Num1 , f32 Copy_f32Num2)
 	f32 Local_f32Result;  		 	/* A variable to hold the result */
 
 	/* Calculate the modulus */
-        f32 Local_f32Result = Copy_f32Num1 - ((u32)(Copy_f32Num1/Copy_f32Num2) * Copy_f32Num2);
+        Local_f32Result = Copy_f32Num1 - ((u32)(Copy_f32Num1/Copy_f32Num2) * Copy_f32Num2);
 
 	return Local_f32Result;
 }
