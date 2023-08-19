@@ -9,6 +9,7 @@
 #include "../../LIB/BIT_MATH.h"
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/STD_ERRORS.h"
+#include "../../LIB/VECTOR.h"
 
 #include "EXTI_Interface.h"
 #include "EXTI_Private.h"
@@ -416,8 +417,7 @@ u8 EXTI_u8EXTI2SetCallback(void(*Copy_pvEXTI2Func)(void))
 /************************************************/
 /* 	External Interrupt Request 0		*/
 /************************************************/
-void __vector_1 (void) __attribute__ ((signal,used, externally_visible)) ; \
-void __vector_1 (void)
+ISR(VECTOR_1)
 {
 	/* Check If EXTI0 Callback Function is Registered or Not */
 	if(EXTI_pvEXTI0Func != NULL)
@@ -430,8 +430,7 @@ void __vector_1 (void)
 /************************************************/
 /* 	External Interrupt Request 1		*/
 /************************************************/
-void __vector_2 (void) __attribute__ ((signal,used, externally_visible)) ; \
-void __vector_2 (void)
+ISR(VECTOR_2)
 {
 	/* Check If EXTI1 Callback Function is Registered or Not */
 	if(EXTI_pvEXTI1Func != NULL)
@@ -444,8 +443,7 @@ void __vector_2 (void)
 /************************************************/
 /* 	External Interrupt Request 2		*/
 /************************************************/
-void __vector_3 (void) __attribute__ ((signal,used, externally_visible)) ; \
-void __vector_3 (void)
+ISR(VECTOR_3)
 {
 	/* Check If EXTI2 Callback Function is Registered or Not */
 	if(EXTI_pvEXTI2Func != NULL)
