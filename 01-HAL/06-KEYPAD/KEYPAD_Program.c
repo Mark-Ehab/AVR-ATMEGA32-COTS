@@ -29,18 +29,18 @@
 #if    KEYPAD_TYPE == NORMAL_KEYPAD
 
 	/* Define Normal Keypad */
-	static u8 Global_u8NormalKeypad[KEYPAD_ROWS_NUM][KEYPAD_COLUMNS_NUM] = {{ 1  , 2  , 3  , 4  },
-										{ 5  , 6  , 7  , 8  },
-										{ 9  , 10 , 11 , 12 },
-										{ 13 , 14 , 15 , 16 }};
+	static u8 Global_u8Keypad[KEYPAD_ROWS_NUM][KEYPAD_COLUMNS_NUM] = {{ 1  , 2  , 3  , 4  },
+									  { 5  , 6  , 7  , 8  },
+									  { 9  , 10 , 11 , 12 },
+								          { 13 , 14 , 15 , 16 }};
 
 #elif  KEYPAD_TYPE == CALCULATOR_KEYPAD
 
 	/* Define Calculator Keypad */
-	static u8 Global_u8CalculatorKeypad[KEYPAD_ROWS_NUM][KEYPAD_COLUMNS_NUM] = {{ '1' , '2' , '3' , '+' },
-										    { '4' , '5' , '6' , '-' },
-										    { '7' , '8' , '9' , 'x' },
-										    { '=' , '0' , '.' , '/' }};
+	static u8 Global_u8Keypad[KEYPAD_ROWS_NUM][KEYPAD_COLUMNS_NUM] = {{ '1' , '2' , '3' , '+' },
+									  { '4' , '5' , '6' , '-' },
+									  { '7' , '8' , '9' , 'x' },
+									  { '=' , '0' , '.' , '/' }};
 #else
 	#error " Wrong Keypad Type Configuration! "
 #endif
@@ -59,30 +59,30 @@
 void KEYPAD_vidInit(void)
 {
 	/******************************************Set Direction of All Pins Connected To Keypad Rows as Inputs*****************************************/
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_0,INPUT);
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_1,INPUT);
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_2,INPUT);
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_3,INPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_0,DIO_PIN_INPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_1,DIO_PIN_INPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_2,DIO_PIN_INPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_ROW_3,DIO_PIN_INPUT);
 
 
 	/******************************************Set Direction of All Pins Connected To Keypad Columns as Outputs*****************************************/
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_0,OUTPUT);
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_1,OUTPUT);
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_2,OUTPUT);
-	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_3,OUTPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_0,DIO_PIN_OUTPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_1,DIO_PIN_OUTPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_2,DIO_PIN_OUTPUT);
+	DIO_u8setPinDir(KEYPAD_PORT,KEYPAD_COLUMN_3,DIO_PIN_OUTPUT);
 
 	/******************************************Set Initial Value of All Pins Connected To Keypad Rows as Input Pulled up*****************************************/
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_0,HIGH);
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_1,HIGH);
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_2,HIGH);
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_3,HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_0,DIO_PIN_HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_1,DIO_PIN_HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_2,DIO_PIN_HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_ROW_3,DIO_PIN_HIGH);
 
 
 	/******************************************Set Initial Value of of All Pins Connected To Keypad Columns as High State*****************************************/
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_0,HIGH);
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_1,HIGH);
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_2,HIGH);
-	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_3,HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_0,DIO_PIN_HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_1,DIO_PIN_HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_2,DIO_PIN_HIGH);
+	DIO_u8setPinVal(KEYPAD_PORT,KEYPAD_COLUMN_3,DIO_PIN_HIGH);
 }
 /**********************************************************************************/
 /* Description     : Get Pressed Key on Keypad					  */
@@ -102,7 +102,7 @@ u8 KEYPAD_u8GetPressedKey(void)
 	for(Local_u8ColumnCounter = KEYPAD_COLUMN_0 ; Local_u8ColumnCounter < 8 ; Local_u8ColumnCounter++)
 	{
 		/* Activate current column through setting the value of pin connected to it as low */
-		DIO_u8setPinVal(KEYPAD_PORT,Local_u8ColumnCounter,LOW);
+		DIO_u8setPinVal(KEYPAD_PORT,Local_u8ColumnCounter,DIO_PIN_LOW);
 
 		/* Select Row */
 		for(Local_u8RowCounter = KEYPAD_ROW_0 ; Local_u8RowCounter < 4 ; Local_u8RowCounter++)
@@ -123,7 +123,7 @@ u8 KEYPAD_u8GetPressedKey(void)
 				if(Local_pu8PinStatus == 0)
 				{
 					/* Get the value of pressed key */
-					Local_u8PressedKeyVal = Global_u8NormalKeypad[Local_u8RowCounter][Local_u8ColumnCounter - 4];
+					Local_u8PressedKeyVal = Global_u8Keypad[Local_u8RowCounter][Local_u8ColumnCounter - 4];
 				}
 
 				/* Check if key is still pressed */
@@ -142,7 +142,7 @@ u8 KEYPAD_u8GetPressedKey(void)
 		}
 
 		/* Deactivate current column through setting the value of pin connected to it as high */
-		DIO_u8setPinVal(KEYPAD_PORT,Local_u8ColumnCounter,HIGH);
+		DIO_u8setPinVal(KEYPAD_PORT,Local_u8ColumnCounter,DIO_PIN_HIGH);
 	}
 
 	return Local_u8PressedKeyVal;

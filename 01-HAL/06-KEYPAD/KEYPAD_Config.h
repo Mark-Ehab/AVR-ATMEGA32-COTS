@@ -20,46 +20,46 @@
 /*********************************************************/
 /* Select Keypad Port :-       				 */
 /* 		         	                         */
-/* Options : - PORT_A                                    */
-/*    	     - PORT_B	                                 */
-/*           - PORT_C	                                 */
-/*	     - PORT_D	                                 */
+/* Options : - DIO_PORT_A                                */
+/*    	     - DIO_PORT_B	                         */
+/*           - DIO_PORT_C	                         */
+/*	     - DIO_PORT_D	                         */
 /* 	                          		 	 */
 /*********************************************************/
-#define KEYPAD_PORT PORT_B /* Default: PORT_B */
+#define KEYPAD_PORT DIO_PORT_B /* Default: DIO_PORT_B */
 /*********************************************************/
 /* Select the Four Pins of Keypad Rows  :-       	 */
 /* 		         	                         */
-/* Options : - PIN_0                                     */
-/*    	     - PIN_1	                                 */
-/*           - PIN_2	                                 */
-/*	     - PIN_3	                                 */
-/*	     - PIN_4                                     */
-/*           - PIN_5                                     */
-/*           - PIN_6                                     */
-/*           - PIN_7			                 */
+/* Options : - DIO_PIN_0                                 */
+/*    	     - DIO_PIN_1	                         */
+/*           - DIO_PIN_2	                         */
+/*	     - DIO_PIN_3	                         */
+/*	     - DIO_PIN_4                                 */
+/*           - DIO_PIN_5                                 */
+/*           - DIO_PIN_6                                 */
+/*           - DIO_PIN_7			         */
 /* 	                          		 	 */
 /*********************************************************/
-#define KEYPAD_ROW_0 PIN_0
-#define KEYPAD_ROW_1 PIN_1
-#define KEYPAD_ROW_2 PIN_2
-#define KEYPAD_ROW_3 PIN_3
+#define KEYPAD_ROW_0 DIO_PIN_0
+#define KEYPAD_ROW_1 DIO_PIN_1
+#define KEYPAD_ROW_2 DIO_PIN_2
+#define KEYPAD_ROW_3 DIO_PIN_3
 /*********************************************************/
 /* Select the Four Pins of Keypad Columns  :-       	 */
 /* 		         	                         */
-/* Options : - PIN_0                                     */
-/*    	     - PIN_1	                                 */
-/*           - PIN_2	                                 */
-/*	     - PIN_3	                                 */
-/*	     - PIN_4                                     */
-/*           - PIN_5                                     */
-/*           - PIN_6                                     */
-/*           - PIN_7			                 */
+/* Options : - DIO_PIN_0                                 */
+/*    	     - DIO_PIN_1	                         */
+/*           - DIO_PIN_2	                         */
+/*	     - DIO_PIN_3	                         */
+/*	     - DIO_PIN_4                                 */
+/*           - DIO_PIN_5                                 */
+/*           - DIO_PIN_6                                 */
+/*           - DIO_PIN_7			         */
 /* 	                          		 	 */
 /*********************************************************/
-#define KEYPAD_COLUMN_0 PIN_4
-#define KEYPAD_COLUMN_1 PIN_5
-#define KEYPAD_COLUMN_2 PIN_6
-#define KEYPAD_COLUMN_3 PIN_7
+#define KEYPAD_COLUMN_0 DIO_PIN_4
+#define KEYPAD_COLUMN_1 DIO_PIN_5
+#define KEYPAD_COLUMN_2 DIO_PIN_6
+#define KEYPAD_COLUMN_3 DIO_PIN_7
 
 #endif /* HAL_KEYPAD_CONFIG_H_ */
