@@ -134,6 +134,9 @@ u8 BUTTON_u8IsPressedDebounced(u8 Copy_u8Port , u8 Copy_u8Pin , u8 Copy_u8Connec
 						/* Get Pin Value */
 						DIO_u8getPinVal(Copy_u8Port,Copy_u8Pin,Local_pu8PtrVar);
 					}
+
+					/* Wait for bounce time */
+					_delay_ms(5);
 				}
 
 				break;
@@ -162,6 +165,9 @@ u8 BUTTON_u8IsPressedDebounced(u8 Copy_u8Port , u8 Copy_u8Pin , u8 Copy_u8Connec
 						/* Get Pin Value */
 						DIO_u8getPinVal(Copy_u8Port,Copy_u8Pin,Local_pu8PtrVar);
 					}
+
+					/* Wait for bounce time */
+					_delay_ms(5);
 				}
 				break;
 
